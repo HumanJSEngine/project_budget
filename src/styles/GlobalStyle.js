@@ -1,22 +1,22 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%; 
 }
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  body {
-    font-weight: 400;
-    font-size: 15px;
-    font-family: "SCoreDream";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+body {
+  font-size: 15px;
+  font-family: "SCoreDream";
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -33,13 +33,13 @@ h1 {
 }
 
 a {
-    text-decoration: none;
-background-color: transparent;
+  text-decoration: none;
+  background-color: transparent;
   }
 
 button {
-    cursor: pointer;
-  }
+  cursor: pointer;
+}
 button,
 input,
 optgroup,
