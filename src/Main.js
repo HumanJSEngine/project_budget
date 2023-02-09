@@ -9,14 +9,14 @@ const Box = styled.div`
 const Box2 = styled.div`
     padding: 1rem;
     margin: 1rem;
-    color: ${(props) => props.theme.Secondary};
+    color: ${(props) => props.theme.Primary};
 `;
 
 const Main = () => {
     return (
         <Box>
             메인2
-            <Box2>메인3</Box2>
+            <Box2></Box2>
         </Box>
     );
 };
