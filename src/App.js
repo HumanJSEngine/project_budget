@@ -3,9 +3,19 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/Theme';
-
 import GlobalStyle from './styles/GlobalStyle';
-import Main from './Main';
+import { useState } from 'react';
+import List from './pages/List';
+import Auth from './pages/Auth';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Calendar from './pages/Calendar';
+import Stats from './pages/Stats';
+import Setting from './pages/Setting';
+import Post from './pages/Post';
+import Write from './pages/Write';
+import GalleryList from './pages/GalleryList';
+import { useSelector } from 'react-redux';
 
 function App() {
     const [isLogin, setIsLogin] = useState(true);

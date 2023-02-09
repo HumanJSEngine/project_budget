@@ -5,24 +5,24 @@ import storageSession from 'redux-persist/lib/storage/session';
 import settingReducer from './settingReducer';
 
 const reducers = combineReducers({
-  setting: settingReducer,
+    setting: settingReducer,
 });
 
 const persistConfig = {
-  key: 'root',
-  storage: storageSession,
-  whitelist: [],
+    key: 'root',
+    storage: storageSession,
+    whitelist: [settingReducer],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({
-      serializableCheck: false,
-    });
-  },
-  devTools: process.env.NODE_ENV !== 'production',
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => {
+        return getDefaultMiddleware({
+            serializableCheck: false,
+        });
+    },
+    devTools: process.env.NODE_ENV !== 'production',
 });
 
 export default store;
