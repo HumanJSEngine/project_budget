@@ -1,10 +1,9 @@
-import React from "react";
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-import theme from "./styles/Theme";
+import React from 'react';
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
-import Main from './Main';
 import { useState } from 'react';
 import List from './pages/List';
 import Auth from './pages/Auth';
