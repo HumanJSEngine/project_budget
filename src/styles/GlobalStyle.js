@@ -1,42 +1,46 @@
 import { createGlobalStyle } from 'styled-components';
+import colors from './Theme';
 
 const GlobalStyle = createGlobalStyle`
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%; 
+  margin: 0;  
+  height: 100%;
+  overflow: hidden;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
+  margin: 0;  
+  height: 100%;
+  overflow: hidden;
+  background: ${colors.white};
   font-size: 15px;
+  color: ${colors.gray900};
   font-family: "SCoreDream";
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 main {
   display: block;
 }
-
 li {
     list-style: none;
   }
-
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
-
 a {
+  color: ${colors.gray900};
   text-decoration: none;
   background-color: transparent;
   }
-
 button {
   cursor: pointer;
 }
@@ -51,14 +55,12 @@ textarea {
   margin: 0; /* 2 */
 overflow: visible;
 }
-
 button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
 }
-
 img {
   border-style: none;
 }
@@ -74,11 +76,9 @@ sup {
   position: relative;
   vertical-align: baseline;
 }
-
 sub {
   bottom: -0.25em;
 }
-
 sup {
   top: -0.5em;
 }

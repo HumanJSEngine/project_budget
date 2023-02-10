@@ -16,5 +16,9 @@ const colors = {
     gray700: '#616161',
     gray800: '#424242',
     gray900: '#212121',
+    kakaoLabel: '#191919',
+    kakaoSymbol: '#000',
+    kakaoContainer: '#FEE500',
 };
+
 export default colors;

@@ -1,17 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
-import storageSession from 'redux-persist/lib/storage/session';
+import storage from 'redux-persist/lib/storage';
+import userReducer from './userReducer';
 import settingReducer from './settingReducer';
 
 const reducers = combineReducers({
+    user: userReducer,
     setting: settingReducer,
 });
 
 const persistConfig = {
     key: 'root',
-    storage: storageSession,
-    whitelist: [settingReducer],
+    storage: storage,
+    whitelist: ['user', 'setting'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -22,7 +24,6 @@ const store = configureStore({
             serializableCheck: false,
         });
     },
-    devTools: process.env.NODE_ENV !== 'production',
 });
 
 export default store;
