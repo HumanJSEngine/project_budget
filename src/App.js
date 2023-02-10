@@ -16,6 +16,7 @@ import Post from './pages/Post';
 import Write from './pages/Write';
 import GalleryList from './pages/GalleryList';
 import { useSelector } from 'react-redux';
+import Header from './components/Layout/Header';
 
 function App() {
     const [isLogin, setIsLogin] = useState(true);
@@ -24,6 +25,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
+            <Header />
             <Routes>
                 {isLogin && (
                     <Route
