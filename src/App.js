@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
@@ -31,11 +31,14 @@ function App() {
                     <Route
                         index
                         element={
-                            listType === 'gallery' ? <GalleryList /> : <List />
+                            listType === 'default' ? <List /> : <GalleryList />
                         }
                     />
                 )}
                 {!isLogin && <Route index element={<Auth />} />}
+                <Route path={'/list'} element={<Navigate to='/' />} />
+                <Route path={'/gallery'} element={<Navigate to='/' />} />
+                <Route path={'/auth'} element={<Auth />} />
                 <Route path={'/register'} element={<Register />} />
                 <Route path={'/login'} element={<Login />} />
                 <Route path={'/calender'} element={<Calendar />} />
