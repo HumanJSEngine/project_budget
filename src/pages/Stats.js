@@ -1,7 +1,14 @@
-import React from "react";
+import React from 'react';
+import BottomNavigation from '../components/common/BottomNavigation';
+import Page from '../styles/Page';
 
 const Stats = () => {
-  return <div>Stats</div>;
+  return (
+    <Page>
+      Stats
+      <BottomNavigation />
+    </Page>
+  );
 };
 
 export default Stats;

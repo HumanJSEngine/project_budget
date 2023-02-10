@@ -1,9 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
+import colors from './Theme';
 
 const GlobalStyle = createGlobalStyle`
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%; 
+  margin: 0;  
+  height: 100%;
+  overflow: hidden;
 }
 * {
   margin: 0;
@@ -12,7 +16,12 @@ html {
 }
 
 body {
+  margin: 0;  
+  height: 100%;
+  overflow: hidden;
+  background: ${colors.white};
   font-size: 15px;
+  color: ${colors.gray900};
   font-family: "SCoreDream";
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -33,6 +42,7 @@ h1 {
 }
 
 a {
+  color: ${colors.gray900};
   text-decoration: none;
   background-color: transparent;
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
@@ -25,11 +25,14 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
-        {isLogin && <Route index element={listType === 'gallery' ? <GalleryList /> : <List />} />}
+        {isLogin && <Route index element={listType === 'default' ? <List /> : <GalleryList />} />}
         {!isLogin && <Route index element={<Auth />} />}
+        <Route path={'/list'} element={<Navigate to='/' />} />
+        <Route path={'/gallery'} element={<Navigate to='/' />} />
+        <Route path={'/auth'} element={<Auth />} />
         <Route path={'/register'} element={<Register />} />
         <Route path={'/login'} element={<Login />} />
-        <Route path={'/calender'} element={<Calendar />} />
+        <Route path={'/calendar'} element={<Calendar />} />
         <Route path={'/stats'} element={<Stats />} />
         <Route path={'/setting'} element={<Setting />} />
         <Route path={'/post'} element={<Post />} />
