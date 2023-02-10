@@ -16,7 +16,6 @@ import Post from './pages/Post';
 import Write from './pages/Write';
 import GalleryList from './pages/GalleryList';
 import { useSelector } from 'react-redux';
-import Header from './components/Layout/Header';
 
 function App() {
     const [isLogin, setIsLogin] = useState(true);
@@ -25,7 +24,6 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Header />
             <Routes>
                 {isLogin && (
                     <Route
@@ -41,7 +39,7 @@ function App() {
                 <Route path={'/auth'} element={<Auth />} />
                 <Route path={'/register'} element={<Register />} />
                 <Route path={'/login'} element={<Login />} />
-                <Route path={'/calender'} element={<Calendar />} />
+                <Route path={'/calendar'} element={<Calendar />} />
                 <Route path={'/stats'} element={<Stats />} />
                 <Route path={'/setting'} element={<Setting />} />
                 <Route path={'/post'} element={<Post />} />
