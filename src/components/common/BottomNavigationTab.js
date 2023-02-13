@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import colors from './Theme';
-import IconBox from './IconBox';
+import colors from '../../styles/Theme';
+import IconBox from '../../styles/IconBox';
 import { BsListUl, BsFillCalendarFill } from 'react-icons/bs';
 import { IoIosStats } from 'react-icons/io';
 import { AiTwotoneSetting } from 'react-icons/ai';
@@ -10,13 +10,13 @@ const BottomNavigationTab = ({ children, type }) => {
   const icon = () => {
     switch (type) {
       case '':
-        return <BsListUl />;
+        return <BsListUl size={16} />;
       case 'calendar':
-        return <BsFillCalendarFill />;
+        return <BsFillCalendarFill size={16} />;
       case 'stats':
-        return <IoIosStats />;
+        return <IoIosStats size={16} />;
       case 'setting':
-        return <AiTwotoneSetting />;
+        return <AiTwotoneSetting size={16} />;
       default:
         return;
     }
