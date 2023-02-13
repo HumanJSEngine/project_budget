@@ -7,6 +7,8 @@ import FormInput from '../components/common/FormInput';
 import InputAlertLabel from '../components/common/InputAlertLabel';
 import PrimaryButton from '../components/common/PrimaryButton';
 import TransparentButton from '../components/common/TransparentButton';
+import Header from '../components/common/Header';
+import HeaderGoBackButton from '../components/common/HeaderGoBackButton';
 
 const Register = () => {
   const registerHandler = (e) => {
@@ -15,6 +17,7 @@ const Register = () => {
   };
   return (
     <Page>
+      <Header title={'가입하기'} HeaderLeft={<HeaderGoBackButton position={'left'} />} />
       <Container>
         <FormArea onSubmit={registerHandler}>
           <InputArea>

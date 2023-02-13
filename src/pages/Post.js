@@ -4,12 +4,28 @@ import Container from '../styles/Container';
 import Page from '../styles/Page';
 import colors from '../styles/Theme';
 import fonts from '../styles/FontStyle';
+import Header from '../components/common/Header';
+import HeaderCloseButton from '../components/common/HeaderCloseButton';
+import HeaderButton from '../components/common/HeaderButton';
+import IconBox from '../styles/IconBox';
+import { FiMoreHorizontal } from 'react-icons/fi';
 
 const Post = () => {
   const [category, setCategory] = useState('카테고리');
   const [detailCategory, setDetailCategory] = useState('세부 카테고리');
   return (
     <Page>
+      <Header
+        title={'작성하다'}
+        HeaderLeft={<HeaderCloseButton position={'left'} />}
+        HeaderRight={
+          <HeaderButton position='right'>
+            <IconBox>
+              <FiMoreHorizontal size={16} />
+            </IconBox>
+          </HeaderButton>
+        }
+      />
       <Container>
         <PhotoArea>
           <ContentsInfo>

@@ -7,6 +7,8 @@ import FormInput from '../components/common/FormInput';
 import InputAlertLabel from '../components/common/InputAlertLabel';
 import PrimaryButton from '../components/common/PrimaryButton';
 import TransparentButton from '../components/common/TransparentButton';
+import Header from '../components/common/Header';
+import HeaderGoBackButton from '../components/common/HeaderGoBackButton';
 
 const Login = () => {
   const loginHandler = (e) => {
@@ -15,6 +17,7 @@ const Login = () => {
   };
   return (
     <Page>
+      <Header title={'로그인'} HeaderLeft={<HeaderGoBackButton position={'left'} />} />
       <Container>
         <FormArea onSubmit={loginHandler}>
           <InputArea>
@@ -32,7 +35,6 @@ const Login = () => {
               />
               <InputAlertLabel state={'warning'}>비밀번호가 일치하지 않습니다.</InputAlertLabel>
             </AuthTextArea>
-
           </InputArea>
           <ActionArea>
             <PrimaryButton>로그인하기</PrimaryButton>
@@ -62,7 +64,6 @@ const InputArea = styled.div`
 `;
 
 const AuthTextArea = styled.div`
-
   display: flex;
   flex-direction: column;
   gap: 4px;
