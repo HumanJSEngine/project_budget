@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import colors from '../../styles/Theme';
 
-const PrimaryButton = ({ children }) => {
-  return <Button>{children}</Button>;
+const PrimaryButton = ({ children, event }) => {
+  return <Button onClick={event && event()}>{children}</Button>;
 };
 
 const Button = styled.button`
