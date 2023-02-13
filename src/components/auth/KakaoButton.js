@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import colors from '../../styles/Theme';
 
-const PrimaryButton = ({ children }) => {
-  return <Button>{children}</Button>;
+const KakaoButton = () => {
+  return <Button>카카오로 가입하기</Button>;
 };
 
 const Button = styled.button`
   width: 100%;
   height: 48px;
   border: none;
-  color: ${colors.white};
-  background: ${colors.primary};
+  color: ${colors.kakaoLabel};
+  background: ${colors.kakaoContainer};
   border-radius: 8px;
 `;
 
-export default PrimaryButton;
+export default KakaoButton;

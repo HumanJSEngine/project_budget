@@ -14,6 +14,7 @@ html {
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   margin: 0;  
   height: 100%;
@@ -26,21 +27,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 main {
   display: block;
 }
+
 li {
     list-style: none;
   }
+
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
+
 a {
   color: ${colors.gray900};
   text-decoration: none;
   background-color: transparent;
   }
+
 button {
   cursor: pointer;
 }
@@ -55,12 +61,14 @@ textarea {
   margin: 0; /* 2 */
 overflow: visible;
 }
+
 button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
 }
+
 img {
   border-style: none;
 }
@@ -76,9 +84,11 @@ sup {
   position: relative;
   vertical-align: baseline;
 }
+
 sub {
   bottom: -0.25em;
 }
+
 sup {
   top: -0.5em;
 }
