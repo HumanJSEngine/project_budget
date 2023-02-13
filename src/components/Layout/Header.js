@@ -7,6 +7,7 @@ import HeaderFrontButton from '../ui/HeaderFrontButton';
 import Search from '../ui/Search';
 
 import Monthwrapper from './Monthwrapper';
+
 const Block = styled.header`
     display: flex;
     max-width: 360px;
@@ -27,7 +28,7 @@ const Header = () => {
                 <Month>2월</Month>
                 <HeaderFrontButton />
             </Monthwrapper>
-            <Search/>
+            <Search />
         </Block>
     );
 };

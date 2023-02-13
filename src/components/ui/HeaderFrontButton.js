@@ -11,14 +11,12 @@ const HeaderFrontButton = () => {
 };
 
 const IconButton = styled.button`
-    padding: 0;
+
     border: none;
     background: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
-    margin-left: -5px;
     svg {
         width: 10px;
         height: 8px;
