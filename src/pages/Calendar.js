@@ -28,9 +28,21 @@ const Calendar = () => {
                             payment={'결제수단'}
                         ></Category>
                     </TitleList>
-                    <Price price={'10000'} />
+                    <Price price={10000} />
+                </ExpendList>
+                <ExpendList>
+                    <TitleList>
+                        <Title title={'제목입니다'} />
+                        <Category
+                            culture={'문화분류'}
+                            place={'장소'}
+                            payment={'결제수단'}
+                        ></Category>
+                    </TitleList>
+                    <Price price={10000} />
                 </ExpendList>
             </Expenditure>
+
             <BottomNavigation />
         </Page>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import colors from '../../styles/Theme';
 
 const Expenditure = ({ children }) => {
     return <Expenditures>{children}</Expenditures>;
@@ -14,6 +15,6 @@ const Expenditures = styled.div`
     gap: 1.5rem 0;
     margin-top: 20px;
     padding: 10px;
-    background: ${(props) => props.theme.colors.white};
+    background: ${colors.white};
 `;
 export default Expenditure;

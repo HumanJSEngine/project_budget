@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import colors from '../../styles/Theme';
+import fonts from '../../styles/FontStyle';
 
 const Datelist = ({ date, weekday }) => {
     return (
@@ -15,8 +17,8 @@ const Datelists = styled.p`
     gap: 0 8px;
 
     span {
-        font: ${(props) => props.theme.fonts.score15Medium};
-        color: ${(props) => props.theme.colors.gray900};
+        color: ${colors.gray900};
+        font: ${fonts.score13Medium};
     }
 `;
 
