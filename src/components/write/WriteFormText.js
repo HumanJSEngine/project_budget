@@ -31,14 +31,14 @@ const Box = styled.div`
 `;
 
 const FormTitle = styled.p`
-  width: 30%;
+  width: 25%;
   height: 100%;
   color: ${colors.gray700};
   font: ${fonts.score15Regular};
 `;
 
 const FormInput = styled.input.attrs({ type: 'text' })`
-  width: 65%;
+  width: 70%;
   height: 100%;
   border: none;
   border-radius: 0;
@@ -59,7 +59,7 @@ const SelectIcon = styled.button`
   display: flex;
   justify-content: right;
   align-items: center;
-  width: 65%;
+  width: 70%;
   height: 100%;
   border: 0;
   background: transparent;

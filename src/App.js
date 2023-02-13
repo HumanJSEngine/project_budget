@@ -16,6 +16,7 @@ import Post from './pages/Post';
 import Write from './pages/Write';
 import GalleryList from './pages/GalleryList';
 import { useSelector } from 'react-redux';
+
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const setting = useSelector((state) => state.setting);
