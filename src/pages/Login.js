@@ -32,6 +32,7 @@ const Login = () => {
               />
               <InputAlertLabel state={'warning'}>비밀번호가 일치하지 않습니다.</InputAlertLabel>
             </AuthTextArea>
+
           </InputArea>
           <ActionArea>
             <PrimaryButton>로그인하기</PrimaryButton>
@@ -61,6 +62,7 @@ const InputArea = styled.div`
 `;
 
 const AuthTextArea = styled.div`
+
   display: flex;
   flex-direction: column;
   gap: 4px;

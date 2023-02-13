@@ -1,9 +1,9 @@
 import PrimaryButton from '../components/common/PrimaryButton';
+
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import TransparentButton from '../components/common/TransparentButton';
 import KakaoButton from '../components/auth/KakaoButton';
-
 const Auth = () => {
   return (
     <Page>
