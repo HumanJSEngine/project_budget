@@ -2,12 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    height: 100%;
+    width: 128px;
+    height: 44px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
-const Monthwrapper = (props) => {
-    return <Wrapper>{props.children}</Wrapper>;
+const Monthwrapper = ({ children }) => {
+    return <Wrapper>{children}</Wrapper>;
 };
 
 export default Monthwrapper;
