@@ -2,13 +2,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from '../styles/Theme';
 import Page from '../styles/Page';
+import Header from '../components/common/Header';
+import HeaderGoBackButton from '../components/common/HeaderGoBackButton';
 import Container from '../styles/Container';
 import FormInput from '../components/common/FormInput';
 import InputAlertLabel from '../components/common/InputAlertLabel';
-import PrimaryButton from '../components/common/PrimaryButton';
-import TransparentButton from '../components/common/TransparentButton';
-import Header from '../components/common/Header';
-import HeaderGoBackButton from '../components/common/HeaderGoBackButton';
+import Button from '../components/common/Button';
 
 const Register = () => {
   const registerHandler = (e) => {
@@ -47,11 +46,11 @@ const Register = () => {
             </AuthTextArea>
           </InputArea>
           <ActionArea>
-            <PrimaryButton>가입하기</PrimaryButton>
+            <Button primary>가입하기</Button>
             <Link to='/login'>
-              <TransparentButton>
+              <Button transparent>
                 이미 계정이 있으신가요? <TextUnderline>로그인하기</TextUnderline>
-              </TransparentButton>
+              </Button>
             </Link>
           </ActionArea>
         </FormArea>

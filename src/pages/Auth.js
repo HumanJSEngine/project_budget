@@ -1,19 +1,16 @@
-import PrimaryButton from '../components/common/PrimaryButton';
-
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import TransparentButton from '../components/common/TransparentButton';
-import KakaoButton from '../components/auth/KakaoButton';
+import Button from '../components/common/Button';
 const Auth = () => {
   return (
     <Page>
       <ButtonArea>
-        <KakaoButton />
+        <Button kakao>카카오로 가입하기</Button>
         <Link to='/register'>
-          <PrimaryButton>이메일로 가입하기</PrimaryButton>
+          <Button primary>이메일로 가입하기</Button>
         </Link>
         <Link to='/login'>
-          <TransparentButton>로그인하기</TransparentButton>
+          <Button transparent>로그인하기</Button>
         </Link>
       </ButtonArea>
     </Page>

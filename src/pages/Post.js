@@ -1,25 +1,32 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
-import Container from '../styles/Container';
-import Page from '../styles/Page';
 import colors from '../styles/Theme';
 import fonts from '../styles/FontStyle';
+import Page from '../styles/Page';
+import Container from '../styles/Container';
 import Header from '../components/common/Header';
 import HeaderCloseButton from '../components/common/HeaderCloseButton';
 import HeaderButton from '../components/common/HeaderButton';
 import IconBox from '../styles/IconBox';
 import { FiMoreHorizontal } from 'react-icons/fi';
+import { ModalContext } from '../components/common/Modal/ModalContext';
+import Modal from '../components/common/Modal/Modal';
+import ModalPost from '../components/common/Modal/ModalPost';
 
 const Post = () => {
+  const { openModal, closeModal } = useContext(ModalContext);
   const [category, setCategory] = useState('카테고리');
   const [detailCategory, setDetailCategory] = useState('세부 카테고리');
+  const handlePostMore = () => {
+    openModal(<ModalPost closeModal={closeModal} />);
+  };
   return (
     <Page>
       <Header
         title={'작성하다'}
         HeaderLeft={<HeaderCloseButton position={'left'} />}
         HeaderRight={
-          <HeaderButton position='right'>
+          <HeaderButton position='right' event={handlePostMore}>
             <IconBox>
               <FiMoreHorizontal size={16} />
             </IconBox>
@@ -52,6 +59,7 @@ const Post = () => {
           </BudgetContents>
         </ContentsArea>
       </Container>
+      <Modal />
     </Page>
   );
 };
