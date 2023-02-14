@@ -3,7 +3,7 @@ import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 import { SlArrowRight } from 'react-icons/sl';
 
-const WriteFormText = ({ type, title }) => {
+const WriteFormText = ({ type, title, selectEvent }) => {
   return (
     <Box>
       <FormTitle>{title}</FormTitle>
@@ -12,7 +12,7 @@ const WriteFormText = ({ type, title }) => {
         readOnly={type === 'select' && true}
       ></FormInput>
       {type === 'select' && (
-        <SelectIcon>
+        <SelectIcon onClick={selectEvent}>
           <SlArrowRight size={12} />
         </SelectIcon>
       )}

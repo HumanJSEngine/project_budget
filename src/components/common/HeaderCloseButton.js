@@ -3,10 +3,10 @@ import HeaderButton from './HeaderButton';
 import IconBox from '../../styles/IconBox';
 import { TfiClose } from 'react-icons/tfi';
 
-const HeaderCloseButton = ({ position }) => {
+const HeaderCloseButton = ({ event }) => {
   const { goBack } = useGoBack();
   return (
-    <HeaderButton position={position} event={goBack}>
+    <HeaderButton event={event ? event : goBack}>
       <IconBox>
         <TfiClose size={16} />
       </IconBox>

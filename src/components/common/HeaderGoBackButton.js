@@ -3,10 +3,10 @@ import HeaderButton from './HeaderButton';
 import IconBox from '../../styles/IconBox';
 import { TfiArrowLeft } from 'react-icons/tfi';
 
-const HeaderGoBackButton = ({ position }) => {
+const HeaderGoBackButton = () => {
   const { goBack } = useGoBack();
   return (
-    <HeaderButton position={position} event={goBack}>
+    <HeaderButton event={goBack}>
       <IconBox>{<TfiArrowLeft size={16} />}</IconBox>
     </HeaderButton>
   );

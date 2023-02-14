@@ -5,10 +5,9 @@ import Page from '../styles/Page';
 import Container from '../styles/Container';
 import FormInput from '../components/common/FormInput';
 import InputAlertLabel from '../components/common/InputAlertLabel';
-import PrimaryButton from '../components/common/PrimaryButton';
-import TransparentButton from '../components/common/TransparentButton';
 import Header from '../components/common/Header';
 import HeaderGoBackButton from '../components/common/HeaderGoBackButton';
+import Button from '../components/common/Button';
 
 const Login = () => {
   const loginHandler = (e) => {
@@ -37,11 +36,11 @@ const Login = () => {
             </AuthTextArea>
           </InputArea>
           <ActionArea>
-            <PrimaryButton>로그인하기</PrimaryButton>
+            <Button primary>로그인하기</Button>
             <Link to='/register'>
-              <TransparentButton>
+              <Button transparent>
                 계정이 없으신가요? <TextUnderline>회원가입하기</TextUnderline>
-              </TransparentButton>
+              </Button>
             </Link>
           </ActionArea>
         </FormArea>
