@@ -4,7 +4,7 @@ import { pieData } from './pieData';
 
 const Chart = () => {
     return (
-        <div style={{ width: '360px', height: '250px', objectFit: 'contain' }}>
+        <div style={{ width: '100%', height: '250px', objectFit: 'contain' }}>
             <ResponsivePie
                 data={pieData}
                 margin={{ top: 20, right: 20, bottom: 20, left: 20 }}

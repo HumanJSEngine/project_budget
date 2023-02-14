@@ -9,5 +9,6 @@ const Expcatelists = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+    gap: 10px 0px;
 `;
 export default Expcatelist;

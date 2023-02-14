@@ -9,6 +9,8 @@ const Cate = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px 0;
+    margin-top: 20px;
+    padding: 0 20px;
 `;
 
 export default Category;

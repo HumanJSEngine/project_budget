@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import IconBox from '../../styles/IconBox';
 import { SlArrowRight } from 'react-icons/sl';
 import colors from '../../styles/Theme';
+import fonts from '../../styles/FontStyle';
 
 const Rightlist = ({ price }) => {
     return (
@@ -20,10 +21,23 @@ const Rightlist = ({ price }) => {
 const Rightlists = styled.div`
     display: flex;
     gap: 0 5px;
+    span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: none;
-        color: ${colors.gray500};
+        font: ${fonts.score15Regular};
         background: none;
+        cursor: pointer;
+        svg {
+            color: ${colors.gray500};
+        }
     }
 `;
 export default Rightlist;

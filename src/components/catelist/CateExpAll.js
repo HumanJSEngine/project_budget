@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import colors from '../../styles/Theme';
 import fonts from '../../styles/FontStyle';
 
-const Exppermonth = () => {
+const CateExpAll = ({ part, total }) => {
     return (
         <Expmonth>
-            <p className='month'>1월 문화 비용</p>
-            <p className='monthprice'>+10,000</p>
+            <p>{part}</p>
+            <p>{total}원</p>
         </Expmonth>
     );
 };
@@ -16,15 +16,15 @@ const Expmonth = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px 0;
-    padding: 0 20px;
+    padding: 0 10px;
     margin-top: 10px;
     p:nth-child(1) {
-        font: ${fonts.score13Medium};
+        font: ${fonts.score15Regular};
         color: ${colors.gray900};
     }
     p:nth-child(2) {
-        font: ${fonts.score15Medium};
-        color: ${colors.primary};
+        font-size: 24px;
+        color: ${colors.gray900};
     }
 `;
-export default Exppermonth;
+export default CateExpAll;

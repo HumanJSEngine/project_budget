@@ -9,6 +9,5 @@ const Listcontainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 15px;
 `;
 export default List;
