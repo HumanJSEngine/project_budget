@@ -10,5 +10,8 @@ const Price = ({ price }) => {
 const Prices = styled.div`
     font: ${fonts.score15Medium};
     color: ${colors.primary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 export default Price;

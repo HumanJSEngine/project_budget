@@ -42,7 +42,6 @@ const Calendar = () => {
                     <Price price={10000} />
                 </ExpendList>
             </Expenditure>
-
             <BottomNavigation />
         </Page>
     );

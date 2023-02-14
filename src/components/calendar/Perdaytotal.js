@@ -7,7 +7,7 @@ const Perdaytotal = ({ counts, amounts }) => {
     return (
         <Perdaytotals>
             <span>총 {counts}건</span>
-            <span>+{amounts}</span>
+            <span>+{amounts.toLocaleString()}</span>
         </Perdaytotals>
     );
 };
