@@ -8,21 +8,98 @@ import Container from '../styles/Container';
 import FormInput from '../components/common/FormInput';
 import InputAlertLabel from '../components/common/InputAlertLabel';
 import Button from '../components/common/Button';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { memberJoin } from '../api/memberApi';
+import usePopup from '../hooks/usePopup';
+import Popup from '../components/common/Popup/Popup';
+import { useDispatch } from 'react-redux';
+
+const registerSchema = yup
+  .object({
+    email: yup
+      .string()
+      .trim()
+      .required('이메일 입력은 필수입니다.')
+      .email('이메일 형식이 아닙니다.'),
+    nickName: yup
+      .string()
+      .trim()
+      .required('닉네임 입력은 필수입니다.')
+      .matches(
+        /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?\s]*$/,
+        '닉네임에는 특수문자를 포함할 수 없습니다.'
+      )
+      .min(3, '닉네임은 3자리 이상이여야 합니다.')
+      .max(8, '닉네임은 8자리까지 가능합니다.'),
+    password: yup
+      .string()
+      .required('비밀번호 입력은 필수입니다.')
+      .matches(
+        /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[^\s]*$/,
+        '비밀번호는 영문, 숫자 공백을 제외한 특수문자가 필수입니다.'
+      )
+      .min(8, '비밀번호는 8자리 이상이여야 합니다.')
+      .max(16, '비밀번호는 16자리까지 가능합니다.'),
+    checkPassword: yup
+      .string()
+      .required('비밀번호가 일치하지 않습니다.')
+      .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.'),
+  })
+  .required();
 
 const Register = () => {
-  const registerHandler = (e) => {
-    console.log('clicked');
-    e.preventDefault();
+  const dispatch = useDispatch();
+  const { isOpenPopup, popupMessage, openPopup, closePopup } = usePopup();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(registerSchema), mode: 'onChange' });
+  const registerHandler = async ({ email, nickName, password }) => {
+    const joinData = { email, nickName, password };
+    try {
+      const res = await memberJoin(joinData);
+      const { data, status } = res;
+      console.log(res);
+      if (status === 'CREATED') {
+        // const { email, nickname } = data;
+        dispatch(data);
+      } else {
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+      openPopup('에러가 발생하였습니다. 다시 시도해주세요.');
+    }
   };
+
   return (
     <Page>
       <Header title={'가입하기'} HeaderLeft={<HeaderGoBackButton position={'left'} />} />
       <Container>
-        <FormArea onSubmit={registerHandler}>
+        <FormArea onSubmit={handleSubmit(registerHandler)}>
           <InputArea>
             <AuthTextArea>
-              <FormInput type={'text'} placeholder={'이메일을 입력해 주세요.'} required />
-              <InputAlertLabel state={'success'}>사용 가능한 이메일입니다.</InputAlertLabel>
+              <FormInput
+                type={'text'}
+                placeholder={'이메일을 입력해 주세요.'}
+                {...register('email')}
+              />
+              <InputAlertLabel state={errors.email ? 'warning' : 'success'}>
+                {errors.email?.message}
+              </InputAlertLabel>
+            </AuthTextArea>
+            <AuthTextArea>
+              <FormInput
+                type={'text'}
+                placeholder={'닉네임을 입력해 주세요.'}
+                {...register('nickName')}
+              />
+              <InputAlertLabel state={errors.nickName ? 'warning' : 'success'}>
+                {errors.nickName?.message}
+              </InputAlertLabel>
             </AuthTextArea>
             <AuthTextArea>
               <FormInput
@@ -30,9 +107,11 @@ const Register = () => {
                 name={'password'}
                 placeholder={'비밀번호를 입력해 주세요.'}
                 autoComplete={'off'}
-                required
+                {...register('password')}
               />
-              <InputAlertLabel state={'success'}>사용 불가능한 비밀번호입니다.</InputAlertLabel>
+              <InputAlertLabel state={errors.password ? 'warning' : 'success'}>
+                {errors.password?.message}
+              </InputAlertLabel>
             </AuthTextArea>
             <AuthTextArea>
               <FormInput
@@ -40,9 +119,11 @@ const Register = () => {
                 name={'check-password'}
                 placeholder={'비밀번호를 다시 한번 입력해 주세요.'}
                 autoComplete={'off'}
-                required
+                {...register('checkPassword')}
               />
-              <InputAlertLabel state={'success'}>비밀번호가 일치하지 않습니다.</InputAlertLabel>
+              <InputAlertLabel state={errors.checkPassword ? 'warning' : 'success'}>
+                {errors.checkPassword?.message}
+              </InputAlertLabel>
             </AuthTextArea>
           </InputArea>
           <ActionArea>
@@ -55,6 +136,12 @@ const Register = () => {
           </ActionArea>
         </FormArea>
       </Container>
+      <Popup
+        isOpenPopup={isOpenPopup}
+        closePopup={closePopup}
+        message={popupMessage.current}
+        buttonText={'확인'}
+      />
     </Page>
   );
 };
@@ -62,8 +149,8 @@ const Register = () => {
 const FormArea = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 80px;
-  margin: 100px 16px 0 16px;
+  gap: 64px;
+  margin: 80px 16px 0 16px;
 `;
 
 const InputArea = styled.div`

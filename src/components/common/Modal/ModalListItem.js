@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import fonts from '../../../styles/FontStyle';
 import colors from '../../../styles/Theme';
 
-const ModalListItem = ({ hasDetail, name }) => {
+const ModalListItem = ({ hasDetail, seq, name, selectEvent }) => {
   return (
-    <Box>
+    <Box onClick={() => selectEvent(seq)}>
       <ItemName>{name}</ItemName>
       {hasDetail && (
         <SelectIcon>
