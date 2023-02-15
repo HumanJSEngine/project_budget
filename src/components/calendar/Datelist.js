@@ -6,8 +6,8 @@ import fonts from '../../styles/FontStyle';
 const Datelist = ({ date, weekday }) => {
     return (
         <Datelists>
-            <span>{date}</span>
-            <span>{weekday}</span>
+            {date && <span>{date}</span>}
+            {weekday && <span>{weekday}</span>}
         </Datelists>
     );
 };
