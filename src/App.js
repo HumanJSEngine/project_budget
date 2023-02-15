@@ -38,6 +38,7 @@ function App() {
                 <Route path={'/list'} element={<Navigate to='/' />} />
                 <Route path={'/catelist'} element={<CateList />} />
                 <Route path={'/gallery'} element={<Navigate to='/' />} />
+                <Route path={'/gallerylist'} element={<GalleryList />} />
                 <Route path={'/auth'} element={<Auth />} />
                 <Route path={'/register'} element={<Register />} />
                 <Route path={'/login'} element={<Login />} />
