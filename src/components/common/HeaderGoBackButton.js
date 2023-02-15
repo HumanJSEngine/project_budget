@@ -1,10 +1,10 @@
-import useGoBack from '../../utils/useGoBack';
+import useGoBack from '../../hooks/useGoBack';
 import HeaderButton from './HeaderButton';
 import IconBox from '../../styles/IconBox';
 import { TfiArrowLeft } from 'react-icons/tfi';
 
 const HeaderGoBackButton = () => {
-  const { goBack } = useGoBack();
+  const goBack  = useGoBack();
   return (
     <HeaderButton event={goBack}>
       <IconBox>{<TfiArrowLeft size={16} />}</IconBox>

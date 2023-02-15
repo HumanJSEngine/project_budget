@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import colors from '../styles/Theme';
 import fonts from '../styles/FontStyle';
@@ -9,12 +9,13 @@ import HeaderCloseButton from '../components/common/HeaderCloseButton';
 import HeaderButton from '../components/common/HeaderButton';
 import IconBox from '../styles/IconBox';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import { ModalContext } from '../components/common/Modal/ModalContext';
+import useModal from '../hooks/useModal';
 import Modal from '../components/common/Modal/Modal';
 import ModalPost from '../components/common/Modal/ModalPost';
 
 const Post = () => {
-  const { openModal, closeModal } = useContext(ModalContext);
+  const { openedModal, openModal, closeModal } = useModal();
+
   const [category, setCategory] = useState('카테고리');
   const [detailCategory, setDetailCategory] = useState('세부 카테고리');
   const handlePostMore = () => {
@@ -59,7 +60,7 @@ const Post = () => {
           </BudgetContents>
         </ContentsArea>
       </Container>
-      <Modal />
+      <Modal openedModal={openedModal} closeModal={closeModal} />
     </Page>
   );
 };

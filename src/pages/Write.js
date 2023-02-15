@@ -10,15 +10,14 @@ import PhotoContents from '../components/write/PhotoContents';
 import WriteFormTitle from '../components/write/WriteFormTitle';
 import WriteFormText from '../components/write/WriteFormText';
 import WriteFormTextArea from '../components/write/WriteFormTextArea';
-import { useContext } from 'react';
-import { ModalContext } from '../components/common/Modal/ModalContext';
 import Modal from '../components/common/Modal/Modal';
 import ModalDate from '../components/common/Modal/ModalDate';
 import ModalCategory from '../components/common/Modal/ModalCategory';
 import ModalPayment from '../components/common/Modal/ModalPayment';
+import useModal from '../hooks/useModal';
 
 const Write = () => {
-  const { openModal, closeModal } = useContext(ModalContext);
+  const { openedModal, openModal, closeModal } = useModal();
   const handleDateSelect = () => {
     openModal(<ModalDate closeModal={closeModal} />);
   };
@@ -54,7 +53,7 @@ const Write = () => {
           <WriteFormText type={'default'} title={'금액'} />
         </WriteForm>
       </Container>
-      <Modal />
+      <Modal openedModal={openedModal} closeModal={closeModal} />
     </Page>
   );
 };

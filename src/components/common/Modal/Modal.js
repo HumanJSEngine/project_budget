@@ -1,15 +1,12 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import colors from '../../../styles/Theme';
-import { ModalContext } from './ModalContext';
 
-const Modal = () => {
-  const { OpenedModal, closeModal } = useContext(ModalContext);
+const Modal = ({ openedModal, closeModal }) => {
   return (
-    OpenedModal && (
+    openedModal && (
       <>
         <ModalBackground onClick={closeModal} />
-        <ModalBox>{OpenedModal}</ModalBox>
+        <ModalBox>{openedModal}</ModalBox>
       </>
     )
   );
