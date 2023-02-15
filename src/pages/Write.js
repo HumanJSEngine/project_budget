@@ -15,8 +15,10 @@ import ModalDate from '../components/common/Modal/ModalDate';
 import ModalCategory from '../components/common/Modal/ModalCategory';
 import ModalPayment from '../components/common/Modal/ModalPayment';
 import useModal from '../hooks/useModal';
+import { useState } from 'react';
 
 const Write = () => {
+  const [category, setCategory] = useState({ cateSeq: 0, cateName: '' });
   const { openedModal, openModal, closeModal } = useModal();
   const handleDateSelect = () => {
     openModal(<ModalDate closeModal={closeModal} />);
@@ -46,7 +48,12 @@ const Write = () => {
           </WriteInfo>
           <WriteFormText type={'default'} title={'장소'} />
           <WriteFormText type={'select'} title={'날짜'} selectEvent={handleDateSelect} />
-          <WriteFormText type={'select'} title={'카테고리'} selectEvent={handleCategorySelect} />
+          <WriteFormText
+            type={'select'}
+            title={'카테고리'}
+            value={category.cateName}
+            selectEvent={handleCategorySelect}
+          />
           <WriteFormTextArea title={'내용'} />
           <WriteFormText type={'select'} title={'결제 수단'} selectEvent={handlePaymentSelect} />
           <WriteFormText type={'default'} title={'결제처'} />

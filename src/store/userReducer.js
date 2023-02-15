@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const INITIAL_STATE = {
-  useruid: '',
+  // useruid: '',
   useremail: '',
   usernickname: '',
-  username: '',
-  userbirth: '',
-  usersex: '',
-  userjob: '',
+  // username: '',
+  // userbirth: '',
+  // usersex: '',
+  // userjob: '',
 };
 
 const userReducer = createSlice({
@@ -16,22 +16,22 @@ const userReducer = createSlice({
   reducers: {
     loginUser: (state, action) => {
       const { uid, name, birth, nickname, sex, job, email } = action.payload;
-      state.useruid = uid;
+      // state.useruid = uid;
       state.useremail = email;
       state.usernickname = nickname;
-      state.username = name;
-      state.userbirth = birth;
-      state.usersex = sex;
-      state.userjob = job;
+      // state.username = name;
+      // state.userbirth = birth;
+      // state.usersex = sex;
+      // state.userjob = job;
     },
     clearUser: (state) => {
-      state.useruid = '';
+      // state.useruid = '';
       state.useremail = '';
       state.usernickname = '';
-      state.username = '';
-      state.userbirth = '';
-      state.usersex = '';
-      state.userjob = '';
+      // state.username = '';
+      // state.userbirth = '';
+      // state.usersex = '';
+      // state.userjob = '';
     },
   },
 });

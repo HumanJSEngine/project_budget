@@ -3,11 +3,12 @@ import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 import { SlArrowRight } from 'react-icons/sl';
 
-const WriteFormText = ({ type, title, selectEvent }) => {
+const WriteFormText = ({ type, title, value, selectEvent }) => {
   return (
     <Box>
       <FormTitle>{title}</FormTitle>
       <FormInput
+        value={value}
         placeholder={type === 'select' ? '선택하세요.' : '입력하세요.'}
         readOnly={type === 'select' && true}
       ></FormInput>
