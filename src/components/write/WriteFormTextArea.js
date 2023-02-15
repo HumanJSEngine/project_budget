@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
-import useResizeTextArea from '../../utils/useResizeTextArea';
+import useResizeTextArea from '../../hooks/useResizeTextArea';
 
 const WriteFormTextArea = ({ title }) => {
   const { textareaHeight, resizeTextarea, onKeyEnter } = useResizeTextArea();

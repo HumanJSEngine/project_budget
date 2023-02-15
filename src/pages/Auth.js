@@ -2,10 +2,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/common/Button';
 const Auth = () => {
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API}&redirect_uri=${process.env.REACT_APP_REDITECT_URI}&response_type=code`;
   return (
     <Page>
       <ButtonArea>
-        <Button kakao>카카오로 가입하기</Button>
+        <Link to={KAKAO_AUTH_URL}>
+          <Button kakao>카카오로 가입하기</Button>
+        </Link>
         <Link to='/register'>
           <Button primary>이메일로 가입하기</Button>
         </Link>
