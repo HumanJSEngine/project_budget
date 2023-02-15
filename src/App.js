@@ -16,7 +16,6 @@ import Post from './pages/Post';
 import Write from './pages/Write';
 import GalleryList from './pages/GalleryList';
 import { useSelector } from 'react-redux';
-import KakaoLogin from './pages/KakaoLogin';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -32,7 +31,6 @@ function App() {
         <Route path={'/gallery'} element={<Navigate to='/' />} />
         <Route path={'/auth'} element={<Auth />} />
         <Route path={'/register'} element={<Register />} />
-        <Route path={'/auth/kakao'} element={<KakaoLogin />} />
         <Route path={'/login'} element={<Login />} />
         <Route path={'/calendar'} element={<Calendar />} />
         <Route path={'/stats'} element={<Stats />} />
