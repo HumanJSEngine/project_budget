@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import BottomNavigation from '../components/common/BottomNavigation';
 import ShowCalendar from '../components/ui/ShowCalendar';
 import Page from '../styles/Page';
@@ -13,44 +14,43 @@ import Datelist from '../components/calendar/Datelist';
 import Perdaytotal from '../components/calendar/Perdaytotal';
 import Header from '../components/Layout/Header';
 import 'react-calendar/dist/Calendar.css';
-import moment from 'moment/moment';
 import 'moment/locale/ko';
+import useFetch from '../hooks/useFetch';
+import GetTotal from '../utils/GetTotal';
 
 const Calendar = () => {
-    const [date, setDate] = useState(new Date());
+    const caldata = useFetch(
+        'get',
+        'http://haeji.mawani.kro.kr:8585/api/expense/page?ehMiSeq=2&page=0&size=20'
+    );
+    console.log(caldata);
 
     return (
         <Page>
             <Header title={'제목'} />
             <CalendarWrap>
-                <ShowCalendar calendarType='US' onChange={setDate} />
+                <ShowCalendar caldata={caldata} />
             </CalendarWrap>
             <Expenditure>
                 <Datelist date={'1일'} weekday={'월요일'} />
-                <Perdaytotal counts={6} amounts={10000} />
+                <Perdaytotal
+                    counts={caldata.length}
+                    amounts={GetTotal(caldata)}
+                />
                 <hr />
-                <ExpendList>
-                    <TitleList>
-                        <Title title={'제목입니다'} />
-                        <Category
-                            culture={'문화분류'}
-                            place={'장소'}
-                            payment={'결제수단'}
-                        ></Category>
-                    </TitleList>
-                    <Price price={10000} />
-                </ExpendList>
-                <ExpendList>
-                    <TitleList>
-                        <Title title={'제목입니다'} />
-                        <Category
-                            culture={'문화분류'}
-                            place={'장소'}
-                            payment={'결제수단'}
-                        ></Category>
-                    </TitleList>
-                    <Price price={10000} />
-                </ExpendList>
+                {caldata.map((item) => (
+                    <ExpendList key={item.ehSeq}>
+                        <TitleList>
+                            <Title title={item.ehTitle} />
+                            <Category
+                                culture={item.ehContent}
+                                place={item.ehLocation}
+                                payment={item.ehCcSeq}
+                            ></Category>
+                        </TitleList>
+                        <Price price={item.ehPrice} />
+                    </ExpendList>
+                ))}
             </Expenditure>
             <BottomNavigation />
         </Page>
@@ -59,16 +59,23 @@ const Calendar = () => {
 
 const CalendarWrap = styled.div`
     .react-calendar {
-        width: 360px;
-        max-width: 100%;
-        border: 1px solid black;
+        width: 100%;
+        max-width: 380px;
         line-height: 1.25em;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         .react-calendar__navigation {
             width: 100%;
+        }
+        .react-calendar__viewContainer {
+            .react-calendar__month-view {
+                .react-calendar__month-view__days {
+                    height: 280px;
+                }
+            }
         }
     }
 `;
