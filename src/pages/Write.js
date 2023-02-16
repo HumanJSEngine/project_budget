@@ -15,20 +15,27 @@ import ModalDate from '../components/common/Modal/ModalDate';
 import ModalCategory from '../components/common/Modal/ModalCategory';
 import ModalPayment from '../components/common/Modal/ModalPayment';
 import useModal from '../hooks/useModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Write = () => {
-  const [category, setCategory] = useState({ cateSeq: 0, cateName: '' });
+  const [category, setCategory] = useState({});
+  const [payment, setPayment] = useState({});
+  const [time, setTime] = useState(null);
   const { openedModal, openModal, closeModal } = useModal();
   const handleDateSelect = () => {
-    openModal(<ModalDate closeModal={closeModal} />);
+    openModal(<ModalDate closeModal={closeModal} setTime={setTime} />);
   };
   const handleCategorySelect = () => {
-    openModal(<ModalCategory closeModal={closeModal} />);
+    openModal(
+      <ModalCategory closeModal={closeModal} setCategory={setCategory} />
+    );
   };
   const handlePaymentSelect = () => {
-    openModal(<ModalPayment closeModal={closeModal} />);
+    openModal(<ModalPayment closeModal={closeModal} setPayment={setPayment} />);
   };
+  useEffect(() => {
+    console.log(time);
+  }, [time]);
   return (
     <Page>
       <Header
@@ -47,15 +54,28 @@ const Write = () => {
             <PhotoContents />
           </WriteInfo>
           <WriteFormText type={'default'} title={'장소'} />
-          <WriteFormText type={'select'} title={'날짜'} selectEvent={handleDateSelect} />
+          <WriteFormText
+            type={'select'}
+            title={'날짜'}
+            selectEvent={handleDateSelect}
+          />
           <WriteFormText
             type={'select'}
             title={'카테고리'}
-            value={category.cateName}
+            value={
+              !category.categoryName
+                ? ''
+                : `${category.categoryName} > ${category.detailCategoryName}`
+            }
             selectEvent={handleCategorySelect}
           />
           <WriteFormTextArea title={'내용'} />
-          <WriteFormText type={'select'} title={'결제 수단'} selectEvent={handlePaymentSelect} />
+          <WriteFormText
+            type={'select'}
+            title={'결제 수단'}
+            value={!payment.paymentName ? '' : `${payment.paymentName}`}
+            selectEvent={handlePaymentSelect}
+          />
           <WriteFormText type={'default'} title={'결제처'} />
           <WriteFormText type={'default'} title={'금액'} />
         </WriteForm>

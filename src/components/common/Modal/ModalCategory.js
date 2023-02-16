@@ -6,14 +6,16 @@ import HeaderCloseButton from '../HeaderCloseButton';
 import ModalListBack from './ModalListBack';
 import ModalListItem from './ModalListItem';
 
-const ModalCategory = ({ closeModal }) => {
+const ModalCategory = ({ closeModal, setCategory }) => {
   const [categoryView, switchCategoryView] = useState('default');
   const [categoryList, setCategoryList] = useState([]);
+  const [detailCategoryList, setDetailCategoryList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState({});
   const getCategoryList = async () => {
+    switchCategoryView('default');
     try {
       const res = await getCategory();
       const { cclist, message, status } = res;
-      console.log(res);
       if (!status) {
         return console.log(message);
       }
@@ -22,14 +24,16 @@ const ModalCategory = ({ closeModal }) => {
       console.log(err);
     }
   };
-  const getDetailCategoryList = async (categorySeq) => {
+  const getDetailCategoryList = async (categorySeq, categoryName) => {
+    setSelectedCategory({ categorySeq, categoryName });
+    switchCategoryView('detail');
     try {
       const res = await getDetailCategory(categorySeq);
       const { cdclist, message, status } = res;
       if (!status) {
         return console.log(message);
       }
-      setCategoryList(cdclist);
+      setDetailCategoryList(cdclist);
     } catch (err) {
       console.log(err);
     }
@@ -37,6 +41,20 @@ const ModalCategory = ({ closeModal }) => {
   useEffect(() => {
     getCategoryList();
   }, []);
+  const selectCategoryHandler = (categorySeq, categoryName) => {
+    const categoryInfo = {
+      categorySeq: selectedCategory.categorySeq,
+      categoryName: selectedCategory.categoryName,
+      detailCategorySeq: categorySeq,
+      detailCategoryName: categoryName,
+    };
+    setCategory(categoryInfo);
+    closeModal();
+  };
+  const backCategory = () => {
+    setDetailCategoryList([]);
+    switchCategoryView('default');
+  };
   const list = categoryList.map(({ ccSeq, ccName }) => (
     <ModalListItem
       key={ccSeq}
@@ -45,6 +63,9 @@ const ModalCategory = ({ closeModal }) => {
       hasDetail={true}
       selectEvent={getDetailCategoryList}
     />
+  ));
+  const detailList = detailCategoryList.map(({ cdcSeq, cdcName }) => (
+    <ModalListItem key={cdcSeq} seq={cdcSeq} name={cdcName} selectEvent={selectCategoryHandler} />
   ));
 
   return (
@@ -56,7 +77,13 @@ const ModalCategory = ({ closeModal }) => {
         border={true}
       />
       <ModalContents>
-        <ModalList>{list}</ModalList>
+        {categoryView === 'default' && <ModalList>{list}</ModalList>}
+        {categoryView === 'detail' && (
+          <ModalList>
+            <ModalListBack name={selectedCategory.categoryName} backEvent={backCategory} />
+            {detailList}
+          </ModalList>
+        )}
       </ModalContents>
     </Box>
   );

@@ -5,7 +5,7 @@ import colors from '../../../styles/Theme';
 
 const ModalListItem = ({ hasDetail, seq, name, selectEvent }) => {
   return (
-    <Box onClick={() => selectEvent(seq)}>
+    <Box onClick={() => selectEvent && selectEvent(seq, name)}>
       <ItemName>{name}</ItemName>
       {hasDetail && (
         <SelectIcon>
