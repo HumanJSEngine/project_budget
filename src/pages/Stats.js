@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BottomNavigation from '../components/common/BottomNavigation';
 import Page from '../styles/Page';
 import Chart from '../components/stats/Chart';
@@ -10,6 +10,7 @@ import Rightlist from '../components/stats/Rightlist';
 import Leftlist from '../components/stats/Leftlist';
 import Monthprice from '../components/stats/Monthprice';
 import Header from '../components/Layout/Header';
+import axios from 'axios';
 
 const Stats = () => {
     return (
@@ -27,6 +28,22 @@ const Stats = () => {
                             color={'#6C72FF'}
                         />
                         <Rightlist price={400000} />
+                    </List>
+                    <List>
+                        <Leftlist
+                            part={'part'}
+                            percent={12.3}
+                            color={'#F47560'}
+                        />
+                        <Rightlist price={200000} />
+                    </List>
+                    <List>
+                        <Leftlist
+                            part={'part'}
+                            percent={12.3}
+                            color={'#F47560'}
+                        />
+                        <Rightlist price={200000} />
                     </List>
                     <List>
                         <Leftlist

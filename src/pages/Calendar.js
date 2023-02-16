@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import BottomNavigation from '../components/common/BottomNavigation';
@@ -25,6 +25,7 @@ const Calendar = () => {
         'http://haeji.mawani.kro.kr:8585/api/expense/list'
     );
     console.log(caldata);
+
     const dateData = GetDateList(caldata);
 
     return (
