@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment/moment';
 import styled from 'styled-components';
 import colors from '../../styles/Theme';
-import GetDateList from '../../utils/GetDateList';
 
-const ShowCalendar = ({ caldata }) => {
+const ShowCalendar = ({ caldata, dateData }) => {
     const [value, onChange] = useState(new Date());
-    const [mark, setMark] = useState(GetDateList(caldata));
-    console.log(mark);
+    const [mark, setMark] = useState(dateData);
+
     return (
         <div>
             <Calendar

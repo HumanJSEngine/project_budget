@@ -10,7 +10,7 @@ const useFetch = (method, url) => {
                 method: method,
                 url: url,
             });
-            setItems(res.data.list);
+            setItems(res.data.expense);
         };
         fetchItem();
     }, [method, url]);

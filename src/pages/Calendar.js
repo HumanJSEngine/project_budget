@@ -17,19 +17,21 @@ import 'react-calendar/dist/Calendar.css';
 import 'moment/locale/ko';
 import useFetch from '../hooks/useFetch';
 import GetTotal from '../utils/GetTotal';
+import GetDateList from '../utils/GetDateList';
 
 const Calendar = () => {
     const caldata = useFetch(
         'get',
-        'http://haeji.mawani.kro.kr:8585/api/expense/page?ehMiSeq=2&page=0&size=20'
+        'http://haeji.mawani.kro.kr:8585/api/expense/list'
     );
     console.log(caldata);
+    const dateData = GetDateList(caldata);
 
     return (
         <Page>
             <Header title={'제목'} />
             <CalendarWrap>
-                <ShowCalendar caldata={caldata} />
+                <ShowCalendar caldata={caldata} dateData={dateData} />
             </CalendarWrap>
             <Expenditure>
                 <Datelist date={'1일'} weekday={'월요일'} />
