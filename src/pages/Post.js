@@ -19,15 +19,15 @@ const Post = () => {
   const [category, setCategory] = useState('카테고리');
   const [detailCategory, setDetailCategory] = useState('세부 카테고리');
   const handlePostMore = () => {
-    openModal(<ModalPost closeModal={closeModal} />);
+    openModal(<ModalPost closeModal={closeModal} postSeq={1} />);
   };
   return (
     <Page>
       <Header
         title={'작성하다'}
-        HeaderLeft={<HeaderCloseButton position={'left'} />}
+        HeaderLeft={<HeaderCloseButton />}
         HeaderRight={
-          <HeaderButton position='right' event={handlePostMore}>
+          <HeaderButton onClick={handlePostMore}>
             <IconBox>
               <FiMoreHorizontal size={16} />
             </IconBox>

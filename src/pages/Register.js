@@ -15,6 +15,7 @@ import { memberJoin } from '../api/memberApi';
 import usePopup from '../hooks/usePopup';
 import Popup from '../components/common/Popup/Popup';
 import { useDispatch } from 'react-redux';
+import { loginUser } from '../store/userReducer';
 
 const registerSchema = yup
   .object({
@@ -65,7 +66,7 @@ const Register = () => {
       console.log(res);
       if (status === 'CREATED') {
         // const { email, nickname } = data;
-        dispatch(data);
+        dispatch(loginUser(data));
       } else {
         return;
       }
@@ -77,7 +78,10 @@ const Register = () => {
 
   return (
     <Page>
-      <Header title={'가입하기'} HeaderLeft={<HeaderGoBackButton position={'left'} />} />
+      <Header
+        title={'가입하기'}
+        HeaderLeft={<HeaderGoBackButton position={'left'} />}
+      />
       <Container>
         <FormArea onSubmit={handleSubmit(registerHandler)}>
           <InputArea>
@@ -121,16 +125,19 @@ const Register = () => {
                 autoComplete={'off'}
                 {...register('checkPassword')}
               />
-              <InputAlertLabel state={errors.checkPassword ? 'warning' : 'success'}>
+              <InputAlertLabel
+                state={errors.checkPassword ? 'warning' : 'success'}
+              >
                 {errors.checkPassword?.message}
               </InputAlertLabel>
             </AuthTextArea>
           </InputArea>
           <ActionArea>
             <Button primary>가입하기</Button>
-            <Link to='/login'>
+            <Link to="/login">
               <Button transparent>
-                이미 계정이 있으신가요? <TextUnderline>로그인하기</TextUnderline>
+                이미 계정이 있으신가요?{' '}
+                <TextUnderline>로그인하기</TextUnderline>
               </Button>
             </Link>
           </ActionArea>

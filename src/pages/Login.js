@@ -15,6 +15,7 @@ import { memberLogin } from '../api/memberApi';
 import Popup from '../components/common/Popup/Popup';
 import usePopup from '../hooks/usePopup';
 import { useDispatch } from 'react-redux';
+import { loginUser } from '../store/userReducer';
 
 const loginSchema = yup
   .object({
@@ -45,7 +46,7 @@ const Login = () => {
         openPopup(message);
         return;
       }
-      dispatch(data);
+      dispatch(loginUser(data));
     } catch (err) {
       console.log(err);
       openPopup('에러가 발생하였습니다. 다시 시도해주세요.');
@@ -54,7 +55,10 @@ const Login = () => {
 
   return (
     <Page>
-      <Header title={'로그인'} HeaderLeft={<HeaderGoBackButton position={'left'} />} />
+      <Header
+        title={'로그인'}
+        HeaderLeft={<HeaderGoBackButton position={'left'} />}
+      />
       <Container>
         <FormArea onSubmit={handleSubmit(loginHandler)}>
           <InputArea>
@@ -83,7 +87,7 @@ const Login = () => {
           </InputArea>
           <ActionArea>
             <Button primary>로그인</Button>
-            <Link to='/register'>
+            <Link to="/register">
               <Button transparent>
                 계정이 없으신가요? <TextUnderline>회원가입하기</TextUnderline>
               </Button>

@@ -3,14 +3,19 @@ import Header from '../Header';
 import HeaderCloseButton from '../HeaderCloseButton';
 import ModalListItem from './ModalListItem';
 
-const ModalPost = ({ closeModal }) => {
+const ModalPost = ({ closeModal, postSeq }) => {
+  const editPostHandler = () => {};
+  const deletePostHandler = () => {};
   return (
     <Box>
-      <Header HeaderRight={<HeaderCloseButton event={closeModal} />} border={true} />
+      <Header
+        HeaderRight={<HeaderCloseButton event={closeModal} />}
+        border={true}
+      />
       <ModalContents>
         <ModalList>
-          <ModalListItem name={'수정하기'} />
-          <ModalListItem name={'삭제하기'} />
+          <ModalListItem name={'수정하기'} selectEvent={editPostHandler} />
+          <ModalListItem name={'삭제하기'} selectEvent={deletePostHandler} />
         </ModalList>
       </ModalContents>
     </Box>

@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 
-const WriteFormTitle = () => {
+const WriteFormTitle = ({ value, onChangeEvent, validation }) => {
   return (
     <Box>
-      <FormInput placeholder={'제목을 입력하세요.'}></FormInput>
+      <FormInput
+        type={'text'}
+        // value={value}
+        // onChange={onChangeEvent}
+        placeholder={'제목을 입력하세요.'}
+        {...validation}
+      />
     </Box>
   );
 };
@@ -19,7 +25,7 @@ const Box = styled.div`
   border-bottom: 1px solid ${colors.gray200};
 `;
 
-const FormInput = styled.input.attrs({ type: 'text' })`
+const FormInput = styled.input`
   width: 100%;
   height: 100%;
   border: none;

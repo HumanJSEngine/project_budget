@@ -1,15 +1,17 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import fonts from '../../../styles/FontStyle';
 import colors from '../../../styles/Theme';
 import Header from '../Header';
 import HeaderButton from '../HeaderButton';
 
-const ModalDate = ({ closeModal, setTime }) => {
-  const date = useRef(null);
-  const time = useRef(null);
+const ModalDate = ({ closeModal, currentTime, setTime }) => {
+  const [selectDate, setSelectDate] = useState(currentTime);
+  const onChangeDate = (e) => {
+    setSelectDate(e.target.value);
+  };
   const selectTime = () => {
-    setTime({ date: date.current.value, time: time.current.value });
+    selectDate && setTime(selectDate);
     closeModal();
   };
   return (
@@ -18,15 +20,18 @@ const ModalDate = ({ closeModal, setTime }) => {
         title={'날짜'}
         titlePosition={'left'}
         HeaderRight={
-          <HeaderButton event={selectTime}>
+          <HeaderButton onClick={selectTime}>
             <HeaderText>완료</HeaderText>
           </HeaderButton>
         }
         border={true}
       />
       <ModalContents>
-        <InputDateTime type='date' ref={date} />
-        <InputDateTime type='time' ref={time} />
+        <InputDateTime
+          type="datetime-local"
+          value={selectDate}
+          onChange={onChangeDate}
+        />
       </ModalContents>
     </Box>
   );

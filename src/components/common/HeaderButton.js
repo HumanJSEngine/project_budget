@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-const HeaderButton = ({ children, event }) => {
-  return <Button onClick={event}>{children}</Button>;
-};
-
-const Button = styled.button`
+const HeaderButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
