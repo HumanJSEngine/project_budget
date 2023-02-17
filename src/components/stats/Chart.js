@@ -1,32 +1,36 @@
 import React from 'react';
 import { ResponsivePie } from '@nivo/pie';
 import { pieData } from './pieData';
+import ConvertStatData from '../../utils/ConvertStatData';
 
-const Chart = () => {
+const Chart = ({ statdata }) => {
+    console.log(ConvertStatData(statdata));
     return (
-        <div style={{ width: '100%', height: '250px', objectFit: 'contain' }}>
+        <div style={{ width: '100%', height: '400px', objectFit: 'contain' }}>
             <ResponsivePie
-                data={pieData}
-                margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                startAngle={-118}
+                data={ConvertStatData(statdata)}
+                margin={{ top: 10, left: 10, bottom: 10, right: 10 }}
+                startAngle={-180}
                 innerRadius={0.1}
                 cornerRadius={7}
-                activeOuterRadiusOffset={10}
-                colors={{ scheme: 'purple_blue' }}
-                borderColor={{ theme: 'background' }}
-                enableArcLinkLabels={false}
-                arcLinkLabelsSkipAngle={7}
-                arcLinkLabelsTextOffset={11}
+                activeInnerRadiusOffset={4}
+                activeOuterRadiusOffset={5}
+                colors={{ scheme: 'blues' }}
+                borderWidth={1}
+                borderColor={{
+                    from: 'color',
+                    modifiers: [['darker', '0']],
+                }}
+                arcLinkLabelsTextOffset={0}
                 arcLinkLabelsTextColor='#333333'
-                arcLinkLabelsOffset={-5}
-                arcLinkLabelsDiagonalLength={12}
-                arcLinkLabelsStraightLength={18}
-                arcLinkLabelsThickness={7}
-                arcLinkLabelsColor={{ from: 'color', modifiers: [] }}
-                arcLabelsRadiusOffset={0.7}
+                arcLinkLabelsOffset={-24}
+                arcLinkLabelsDiagonalLength={0}
+                arcLinkLabelsStraightLength={0}
+                arcLinkLabelsThickness={0}
+                arcLinkLabelsColor={{ from: 'color' }}
                 arcLabelsTextColor={{
                     from: 'color',
-                    modifiers: [['darker', '1.6']],
+                    modifiers: [['darker', '1.3']],
                 }}
                 defs={[
                     {
@@ -48,64 +52,31 @@ const Chart = () => {
                         spacing: 10,
                     },
                 ]}
-                fill={[
+                legends={[
                     {
-                        match: {
-                            id: 'ruby',
-                        },
-                        id: 'dots',
-                    },
-                    {
-                        match: {
-                            id: 'c',
-                        },
-                        id: 'dots',
-                    },
-                    {
-                        match: {
-                            id: 'go',
-                        },
-                        id: 'dots',
-                    },
-                    {
-                        match: {
-                            id: 'python',
-                        },
-                        id: 'dots',
-                    },
-                    {
-                        match: {
-                            id: 'scala',
-                        },
-                        id: 'lines',
-                    },
-                    {
-                        match: {
-                            id: 'lisp',
-                        },
-                        id: 'lines',
-                    },
-                    {
-                        match: {
-                            id: 'elixir',
-                        },
-                        id: 'lines',
-                    },
-                    {
-                        match: {
-                            id: 'javascript',
-                        },
-                        id: 'lines',
+                        anchor: 'bottom',
+                        direction: 'row',
+                        justify: false,
+                        translateX: 200,
+                        translateY: 54,
+                        itemsSpacing: 4,
+                        itemWidth: 67,
+                        itemHeight: 10,
+                        itemTextColor: '#999',
+                        itemDirection: 'right-to-left',
+                        itemOpacity: 1,
+                        symbolSize: 24,
+                        symbolShape: 'circle',
+                        effects: [
+                            {
+                                on: 'hover',
+                                style: {
+                                    itemTextColor: '#000',
+                                },
+                            },
+                        ],
                     },
                 ]}
-                motionConfig={{
-                    mass: 1,
-                    tension: 124,
-                    friction: 26,
-                    clamp: false,
-                    precision: 0.01,
-                    velocity: 0,
-                }}
             />
         </div>
     );

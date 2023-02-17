@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import BottomNavigation from '../components/common/BottomNavigation';
 import ShowCalendar from '../components/ui/ShowCalendar';
 import Page from '../styles/Page';
@@ -17,22 +16,18 @@ import 'react-calendar/dist/Calendar.css';
 import 'moment/locale/ko';
 import useFetch from '../hooks/useFetch';
 import GetTotal from '../utils/GetTotal';
-import GetDateList from '../utils/GetDateList';
 
 const Calendar = () => {
     const caldata = useFetch(
         'get',
         'http://haeji.mawani.kro.kr:8585/api/expense/list'
     );
-    console.log(caldata);
-
-    const dateData = GetDateList(caldata);
 
     return (
         <Page>
             <Header title={'제목'} />
             <CalendarWrap>
-                <ShowCalendar caldata={caldata} dateData={dateData} />
+                <ShowCalendar caldata={caldata} />
             </CalendarWrap>
             <Expenditure>
                 <Datelist date={'1일'} weekday={'월요일'} />
@@ -46,7 +41,7 @@ const Calendar = () => {
                         <TitleList>
                             <Title title={item.ehTitle} />
                             <Category
-                                culture={item.ehContent}
+                                culture={item.ehCcSeq}
                                 place={item.ehLocation}
                                 payment={item.ehCcSeq}
                             ></Category>

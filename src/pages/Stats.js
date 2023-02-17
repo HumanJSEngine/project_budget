@@ -10,52 +10,36 @@ import Rightlist from '../components/stats/Rightlist';
 import Leftlist from '../components/stats/Leftlist';
 import Monthprice from '../components/stats/Monthprice';
 import Header from '../components/Layout/Header';
-import axios from 'axios';
+import useFetch from '../hooks/useFetch';
+import Percent from '../utils/Percent';
 
 const Stats = () => {
+    const statdata = useFetch(
+        'get',
+        'http://haeji.mawani.kro.kr:8585/api/expense/list'
+    );
+    console.log(statdata);
     return (
         <Page>
             <Header />
             <Exppermonth month={'1월'} monthprice={10000} />
             <Category>
                 <Monthprice />
-                <Chart />
+                <Chart statdata={statdata} />
                 <Expcatelist>
-                    <List>
-                        <Leftlist
-                            part={'part'}
-                            percent={52.8}
-                            color={'#6C72FF'}
-                        />
-                        <Rightlist price={400000} />
-                    </List>
-                    <List>
-                        <Leftlist
-                            part={'part'}
-                            percent={12.3}
-                            color={'#F47560'}
-                        />
-                        <Rightlist price={200000} />
-                    </List>
-                    <List>
-                        <Leftlist
-                            part={'part'}
-                            percent={12.3}
-                            color={'#F47560'}
-                        />
-                        <Rightlist price={200000} />
-                    </List>
-                    <List>
-                        <Leftlist
-                            part={'part'}
-                            percent={12.3}
-                            color={'#F47560'}
-                        />
-                        <Rightlist price={200000} />
-                    </List>
+                    {statdata.map((item) => (
+                        <List>
+                            <Leftlist
+                                key={item.ehCcSeq}
+                                part={item.ehC}
+                                percent={Percent(statdata, item.ehPrice)}
+                                color={'#6C72FF'}
+                            />
+                            <Rightlist price={item.ehPrice} />
+                        </List>
+                    ))}
                 </Expcatelist>
             </Category>
-
             <BottomNavigation />
         </Page>
     );

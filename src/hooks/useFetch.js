@@ -2,137 +2,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const useFetch = (method, url) => {
-    const [items, setItems] = useState([
-        {
-            ehSeq: 34,
-            ehTitle: 'test',
-            ehContent: 'test',
-            ehMiSeq: 1,
-            ehDate: '2022-02-09T00:00:00',
-            ehPiSeq: 1,
-            ehPrice: 12000,
-            ehStoreName: 'test',
-            ehImgFile: 'Expose_1676530079360.jpeg',
-            ehLocation: 'test',
-            ehBalance: 10000000,
-            ehCcSeq: 1,
-            ehCdcSeq: 1,
-        },
-        {
-            ehSeq: 35,
-            ehTitle: 'test',
-            ehContent: 'test',
-            ehMiSeq: 1,
-            ehDate: '2022-02-09T00:00:00',
-            ehPiSeq: 1,
-            ehPrice: 16000,
-            ehStoreName: 'test',
-            ehImgFile: 'Expose_1676530079360.jpeg',
-            ehLocation: 'test',
-            ehBalance: 10000000,
-            ehCcSeq: 1,
-            ehCdcSeq: 1,
-        },
-        {
-            ehSeq: 36,
-            ehTitle: 'test',
-            ehContent: 'test',
-            ehMiSeq: 1,
-            ehDate: '2022-02-09T00:00:00',
-            ehPiSeq: 1,
-            ehPrice: 20000,
-            ehStoreName: 'test',
-            ehImgFile: 'Expose_1676530079360.jpeg',
-            ehLocation: 'test',
-            ehBalance: 10000000,
-            ehCcSeq: 1,
-            ehCdcSeq: 1,
-        },
-        {
-            ehSeq: 37,
-            ehTitle: 'test2',
-            ehContent: 'test',
-            ehMiSeq: 1,
-            ehDate: '2022-02-09T00:00:00',
-            ehPiSeq: 1,
-            ehPrice: 10000,
-            ehStoreName: 'test',
-            ehImgFile: 'Expose_1676530079360.jpeg',
-            ehLocation: 'test',
-            ehBalance: 10000000,
-            ehCcSeq: 1,
-            ehCdcSeq: 1,
-        },
-        {
-            ehSeq: 38,
-            ehTitle: 'test3',
-            ehContent: 'test',
-            ehMiSeq: 1,
-            ehDate: '2022-02-09T00:00:00',
-            ehPiSeq: 1,
-            ehPrice: 18000,
-            ehStoreName: 'test',
-            ehImgFile: 'Expose_1676530079360.jpeg',
-            ehLocation: 'test',
-            ehBalance: 10000000,
-            ehCcSeq: 1,
-            ehCdcSeq: 1,
-        },
-        {
-            ehSeq: 39,
-            ehTitle: 'test3',
-            ehContent: 'test',
-            ehMiSeq: 1,
-            ehDate: '2022-02-09T00:00:00',
-            ehPiSeq: 1,
-            ehPrice: 21000,
-            ehStoreName: 'test',
-            ehImgFile: 'Expose_1676530079360.jpeg',
-            ehLocation: 'test',
-            ehBalance: 10000000,
-            ehCcSeq: 1,
-            ehCdcSeq: 1,
-        },
-        {
-            ehSeq: 40,
-            ehTitle: 'test5',
-            ehContent: 'test',
-            ehMiSeq: 1,
-            ehDate: '2022-02-09T00:00:00',
-            ehPiSeq: 1,
-            ehPrice: 23000,
-            ehStoreName: 'test',
-            ehImgFile: 'Expose_1676530079360.jpeg',
-            ehLocation: 'test',
-            ehBalance: 10000000,
-            ehCcSeq: 1,
-            ehCdcSeq: 1,
-        },
-        {
-            ehSeq: 41,
-            ehTitle: 'test8',
-            ehContent: 'test',
-            ehMiSeq: 1,
-            ehDate: '2022-02-09T00:00:00',
-            ehPiSeq: 1,
-            ehPrice: 52000,
-            ehStoreName: 'test',
-            ehImgFile: 'Expose_1676530079360.jpeg',
-            ehLocation: 'test',
-            ehBalance: 10000000,
-            ehCcSeq: 1,
-            ehCdcSeq: 1,
-        },
-    ]);
+    const [items, setItems] = useState([]);
     useEffect(() => {
-        // const fetchItem = async () => {
-        //     const res = await axios({
-        //         method: method,
-        //         url: url,
-        //     });
-        //     setItems(res.data.expense);
-        // };
-        // fetchItem();
+        const fetchItem = async () => {
+            const res = await axios({
+                method: method,
+                url: url,
+            });
+            setItems(res.data.expense);
+        };
+        fetchItem();
     }, []);
 
     return items;
