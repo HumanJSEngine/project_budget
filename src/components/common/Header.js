@@ -15,16 +15,21 @@ const Header = ({ title, titlePosition, border, HeaderLeft, HeaderRight }) => {
 const Block = styled.header`
   position: relative;
   display: flex;
-  justify-content: ${({ titlePosition }) => (titlePosition ? titlePosition : 'center')};
+  justify-content: ${({ titlePosition }) =>
+    titlePosition ? titlePosition : 'center'};
   align-items: center;
   width: 100%;
   height: 44px;
   padding: 0 4px;
   color: ${colors.gray900};
-  border-bottom: ${({ border }) => (border ? `1px solid ${colors.gray200}` : '')};
+  border-bottom: ${({ border }) =>
+    border ? `1px solid ${colors.gray200}` : ''};
 `;
 
-const HeaderTitle = styled.span`
+const HeaderTitle = styled.p`
+  display: flex;
+  align-items: center;
+  height: 44px;
   padding: 0 12px;
   color: ${colors.gray900};
   font: ${fonts.score15Regular};

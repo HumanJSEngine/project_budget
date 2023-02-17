@@ -3,7 +3,26 @@ import Header from '../Header';
 import HeaderCloseButton from '../HeaderCloseButton';
 import ModalListItem from './ModalListItem';
 
-const ModalPayment = ({ closeModal }) => {
+const ModalPayment = ({ closeModal, setPayment }) => {
+  const getPaymentList = async () => {
+    // try {
+    // const res = await getPayment();
+    //   const { message, status } = res;
+    //   if (!status) {
+    //     return console.log(message);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
+  const selectPaymentHandler = (paymentSeq, paymentName) => {
+    // const paymentInfo = {
+    //   paymentSeq,
+    //   paymentName,
+    // };
+    // setPayment(paymentInfo);
+    closeModal();
+  };
   return (
     <Box>
       <Header
@@ -14,14 +33,7 @@ const ModalPayment = ({ closeModal }) => {
       />
       <ModalContents>
         <ModalList>
-          <ModalListItem name={'카드이름'} />
-          <ModalListItem name={'카드이름'} />
-          <ModalListItem name={'카드이름'} />
-          <ModalListItem name={'카드이름'} />
-          <ModalListItem name={'카드이름'} />
-          <ModalListItem name={'카드이름'} />
-          <ModalListItem name={'카드이름'} />
-          <ModalListItem name={'카드이름'} />
+          <ModalListItem name={'카드이름'} selectEvent={selectPaymentHandler} />
         </ModalList>
       </ModalContents>
     </Box>
