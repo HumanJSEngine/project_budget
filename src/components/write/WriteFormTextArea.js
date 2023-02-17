@@ -3,7 +3,7 @@ import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 import useResizeTextArea from '../../hooks/useResizeTextArea';
 
-const WriteFormTextArea = ({ title }) => {
+const WriteFormTextArea = ({ title, validation }) => {
   const { textareaHeight, resizeTextarea, onKeyEnter } = useResizeTextArea();
   return (
     <Box>
@@ -13,6 +13,7 @@ const WriteFormTextArea = ({ title }) => {
         onInput={resizeTextarea}
         onKeyDown={onKeyEnter}
         row={textareaHeight.row}
+        {...validation}
       />
     </Box>
   );

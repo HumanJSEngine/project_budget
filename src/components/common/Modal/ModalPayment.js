@@ -2,27 +2,33 @@ import styled from 'styled-components';
 import Header from '../Header';
 import HeaderCloseButton from '../HeaderCloseButton';
 import ModalListItem from './ModalListItem';
+import { getPayment } from '../../../api/paymentApi';
+import { useEffect } from 'react';
 
 const ModalPayment = ({ closeModal, setPayment }) => {
-  const getPaymentList = async () => {
-    // try {
-    // const res = await getPayment();
-    //   const { message, status } = res;
-    //   if (!status) {
-    //     return console.log(message);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+  const getPaymentList = async (paymentType) => {
+    try {
+      const res = await getPayment(paymentType);
+      const { message, status } = res;
+      console.log(res);
+      if (!status) {
+        return console.log(message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   const selectPaymentHandler = (paymentSeq, paymentName) => {
-    // const paymentInfo = {
-    //   paymentSeq,
-    //   paymentName,
-    // };
-    // setPayment(paymentInfo);
+    const paymentInfo = {
+      paymentSeq: 1,
+      paymentName: '샘숭',
+    };
+    setPayment(paymentInfo);
     closeModal();
   };
+  useEffect(() => {
+    getPaymentList(1);
+  }, []);
   return (
     <Box>
       <Header

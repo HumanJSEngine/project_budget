@@ -6,7 +6,7 @@ import { TfiClose } from 'react-icons/tfi';
 const HeaderCloseButton = ({ event }) => {
   const goBack = useGoBack();
   return (
-    <HeaderButton event={event ? event : goBack}>
+    <HeaderButton onClick={event ? event : goBack}>
       <IconBox>
         <TfiClose size={16} />
       </IconBox>

@@ -1,18 +1,22 @@
 import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
+import { SlArrowRight } from 'react-icons/sl';
 
-const WriteFormText = ({ title, value, onChangeEvent, validation }) => {
+const WriteFormSelect = ({ title, value, selectEvent, validation }) => {
   return (
     <Box>
       <FormTitle>{title}</FormTitle>
       <FormInput
         type="text"
-        // value={value}
-        placeholder="입력하세요."
-        // onChange={onChangeEvent}
+        value={value}
+        placeholder="선택하세요."
+        readOnly={true}
         {...validation}
       ></FormInput>
+      <SelectIcon onClick={selectEvent}>
+        <SlArrowRight size={12} />
+      </SelectIcon>
     </Box>
   );
 };
@@ -49,7 +53,7 @@ const FormInput = styled.input`
   }
 `;
 
-const SelectIcon = styled.button`
+const SelectIcon = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -64,4 +68,4 @@ const SelectIcon = styled.button`
   cursor: pointer;
 `;
 
-export default WriteFormText;
+export default WriteFormSelect;

@@ -22,6 +22,7 @@ const Block = styled.header`
   height: 44px;
   padding: 0 4px;
   color: ${colors.gray900};
+  border-top: ${({ border }) => (border ? `1px solid ${colors.gray200}` : '')};
   border-bottom: ${({ border }) =>
     border ? `1px solid ${colors.gray200}` : ''};
 `;
