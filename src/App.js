@@ -16,6 +16,7 @@ import Post from './pages/Post';
 import Write from './pages/Write';
 import GalleryList from './pages/GalleryList';
 import { useSelector } from 'react-redux';
+import SetCategory from './pages/SetCategory';
 
 function App() {
     const [isLogin, setIsLogin] = useState(true);
@@ -43,6 +44,7 @@ function App() {
                 <Route path={'/calendar'} element={<Calendar />} />
                 <Route path={'/stats'} element={<Stats />} />
                 <Route path={'/setting'} element={<Setting />} />
+                <Route path={'/setcategory'} element={<SetCategory />} />
                 <Route path={'/post'} element={<Post />} />
                 <Route path={'/write'} element={<Write />} />
             </Routes>

@@ -15,10 +15,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const List = () => {
-    const { ref, inView } = useInView({
-        threshold: 0,
-    });
-
     const listdata = useFetch(
         'get',
         'http://haeji.mawani.kro.kr:8585/api/expense/list'
