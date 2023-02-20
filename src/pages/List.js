@@ -9,6 +9,7 @@ import Category from '../components/calendar/Category';
 import Price from '../components/calendar/Price';
 import DateListTotal from '../components/list/DateListTotal';
 import useFetch from '../hooks/useFetch';
+import GetTotal from '../utils/GetTotal';
 
 const List = () => {
     const listdata = useFetch(
@@ -19,7 +20,10 @@ const List = () => {
         <Page>
             <Expenditure>
                 <>
-                    <DateListTotal date={'16일 월요일'} price={10000} />
+                    <DateListTotal
+                        date={'16일 월요일'}
+                        price={GetTotal(listdata).toLocaleString()}
+                    />
                     <hr />
                     {listdata.map(
                         ({ ehSeq, ehTitle, ehCcSeq, ehStoreName, ehPiSeq }) => (

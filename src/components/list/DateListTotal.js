@@ -7,7 +7,7 @@ const DateListTotal = ({ date, price }) => {
     return (
         <DateTotal>
             <span>{date}</span>
-            {price ? <span>{price}</span> : null}
+            {price ? <span>{price}</span> : <span>지출금액 없음</span>}
         </DateTotal>
     );
 };
