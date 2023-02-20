@@ -10,12 +10,20 @@ import Price from '../components/calendar/Price';
 import DateListTotal from '../components/list/DateListTotal';
 import useFetch from '../hooks/useFetch';
 import GetTotal from '../utils/GetTotal';
+import { useInView } from 'react-intersection-observer';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const List = () => {
+    const { ref, inView } = useInView({
+        threshold: 0,
+    });
+
     const listdata = useFetch(
         'get',
         'http://haeji.mawani.kro.kr:8585/api/expense/list'
     );
+
     return (
         <Page>
             <Expenditure>
