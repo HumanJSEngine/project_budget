@@ -10,49 +10,48 @@ import Price from '../components/calendar/Price';
 import DateListTotal from '../components/list/DateListTotal';
 import useFetch from '../hooks/useFetch';
 import GetTotal from '../utils/GetTotal';
-import { useInView } from 'react-intersection-observer';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import Container from '../styles/Container';
+import Header from '../components/Layout/Header';
+import WriteButton from '../components/common/WriteButton';
 
 const List = () => {
-    const { ref, inView } = useInView({
-        threshold: 0,
-    });
-
-    const listdata = useFetch(
-        'get',
-        'http://haeji.mawani.kro.kr:8585/api/expense/list'
-    );
-
-    return (
-        <Page>
-            <Expenditure>
-                <>
-                    <DateListTotal
-                        date={'16일 월요일'}
-                        price={GetTotal(listdata).toLocaleString()}
-                    />
-                    <hr />
-                    {listdata.map(
-                        ({ ehSeq, ehTitle, ehCcSeq, ehStoreName, ehPiSeq }) => (
-                            <ExpendList key={ehSeq}>
-                                <TitleList>
-                                    <Title title={ehTitle} />
-                                    <Category
-                                        culture={ehCcSeq}
-                                        place={ehStoreName}
-                                        payment={ehPiSeq}
-                                    ></Category>
-                                </TitleList>
-                                <Price price={10000} />
-                            </ExpendList>
-                        )
-                    )}
-                </>
-            </Expenditure>
-            <BottomNavigation />
-        </Page>
-    );
+  const listdata = useFetch(
+    'get',
+    'http://haeji.mawani.kro.kr:8585/api/expense/list'
+  );
+  return (
+    <Page>
+      <Header title={'제목'} />
+      <Container>
+        <Expenditure>
+          <>
+            <DateListTotal
+              date={'16일 월요일'}
+              price={GetTotal(listdata).toLocaleString()}
+            />
+            <hr />
+            {listdata.map(
+              ({ ehSeq, ehTitle, ehCcSeq, ehStoreName, ehPiSeq }) => (
+                <ExpendList key={ehSeq}>
+                  <TitleList>
+                    <Title title={ehTitle} />
+                    <Category
+                      culture={ehCcSeq}
+                      place={ehStoreName}
+                      payment={ehPiSeq}
+                    ></Category>
+                  </TitleList>
+                  <Price price={10000} />
+                </ExpendList>
+              )
+            )}
+          </>
+        </Expenditure>
+        <WriteButton />
+      </Container>
+      <BottomNavigation />
+    </Page>
+  );
 };
 
 export default List;

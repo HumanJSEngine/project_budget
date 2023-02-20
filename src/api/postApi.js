@@ -8,7 +8,6 @@ export const addPost = async (postData) => {
     price,
     storeName,
     location,
-    balance,
     categorySeq,
     detailCategorySeq,
     content,
@@ -20,11 +19,11 @@ export const addPost = async (postData) => {
     ehPrice: price,
     ehStoreName: storeName,
     ehLocation: location,
-    ehBalance: balance,
     ehCcSeq: categorySeq,
     ehCdcSeq: detailCategorySeq,
     ehContent: content,
   };
+  console.log(params);
   const res = await apiClient.post('/api/expense/add', { params });
   return res.data;
 };

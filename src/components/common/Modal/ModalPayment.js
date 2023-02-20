@@ -5,7 +5,7 @@ import ModalListItem from './ModalListItem';
 import { getPayment } from '../../../api/paymentApi';
 import { useEffect } from 'react';
 
-const ModalPayment = ({ closeModal, setPayment }) => {
+const ModalPayment = ({ closeModal, paymentRef }) => {
   const getPaymentList = async (paymentType) => {
     try {
       const res = await getPayment(paymentType);
@@ -23,7 +23,7 @@ const ModalPayment = ({ closeModal, setPayment }) => {
       paymentSeq: 1,
       paymentName: '샘숭',
     };
-    setPayment(paymentInfo);
+    paymentRef.current = paymentInfo;
     closeModal();
   };
   useEffect(() => {

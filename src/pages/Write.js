@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import colors from '../styles/Theme';
 import fonts from '../styles/FontStyle';
@@ -20,74 +20,130 @@ import moment from 'moment';
 import WriteFormSelect from '../components/write/WriteFormSelect';
 import Popup from '../components/common/Popup/Popup';
 import usePopup from '../hooks/usePopup';
+import { addPost } from '../api/postApi';
 
 const Write = () => {
-  const [time, setTime] = useState(moment().format('YYYY-MM-DDTHH:mm'));
-  const [category, setCategory] = useState('');
-  const [payment, setPayment] = useState('');
+  const titleRef = useRef(null);
+  const imgRef = useRef(null);
+  const placeRef = useRef(null);
+  const timeRef = useRef(moment().format('YYYY-MM-DDTHH:mm'));
+  const categoryRef = useRef(null);
+  const contentRef = useRef(null);
+  const paymentRef = useRef(null);
+  const payPlaceRef = useRef(null);
+  const payPriceRef = useRef(null);
   const { isOpenPopup, popupMessage, openPopup, closePopup } = usePopup();
   const { openedModal, openModal, closeModal } = useModal();
   const handleDateSelect = () => {
-    openModal(
-      <ModalDate closeModal={closeModal} currentTime={time} setTime={setTime} />
-    );
+    openModal(<ModalDate closeModal={closeModal} timeRef={timeRef} />);
   };
   const handleCategorySelect = () => {
     openModal(
-      <ModalCategory closeModal={closeModal} setCategory={setCategory} />
+      <ModalCategory closeModal={closeModal} categoryRef={categoryRef} />
     );
   };
   const handlePaymentSelect = () => {
-    openModal(<ModalPayment closeModal={closeModal} setPayment={setPayment} />);
+    openModal(<ModalPayment closeModal={closeModal} paymentRef={paymentRef} />);
   };
-  const postSubmitHandler = (postData) => {
-    console.log(time, category, payment);
+  const postSubmitHandler = async () => {
+    if (checkValidation()) {
+      return;
+    }
+    const postData = {
+      title: titleRef.current.value,
+      date: timeRef.current,
+      paymentSeq: paymentRef.current.paymentSeq,
+      price: payPriceRef.current.value,
+      storeName: payPlaceRef.current.value,
+      location: placeRef.current.value,
+      categorySeq: categoryRef.current.categorySeq,
+      detailCategorySeq: categoryRef.current.detailCategoryName,
+      content: contentRef.current.value,
+    };
+    try {
+      const res = await addPost(postData);
+      console.log(res);
+    } catch (err) {
+      console.log(err.response);
+    }
   };
-
+  const checkValidation = () => {
+    if (!titleRef.current.value.trim()) {
+      openPopup('제목을 입력해 주세요.');
+      return true;
+    }
+    if (!placeRef.current.value) {
+      openPopup('장소를 입력해 주세요.');
+      return true;
+    }
+    if (!timeRef.current) {
+      openPopup('시간을 선택해 주세요.');
+      return true;
+    }
+    if (!categoryRef.current) {
+      openPopup('카테고리를 선택해 주세요.');
+      return true;
+    }
+    if (!paymentRef.current) {
+      openPopup('결제 수단을 선택해 주세요.');
+      return true;
+    }
+    if (!payPlaceRef.current.value) {
+      openPopup('결제처를 입력해 주세요.');
+      return true;
+    }
+    if (!payPlaceRef.current.value) {
+      openPopup('금액을 입력해 주세요.');
+      return true;
+    }
+    return false;
+  };
   return (
     <Page>
       <Header
         title={'기록하다'}
         HeaderLeft={<HeaderCloseButton />}
         HeaderRight={
-          <HeaderButton type='submit' form='write-form'>
+          <HeaderButton onClick={postSubmitHandler}>
             <ButtonText>등록</ButtonText>
           </HeaderButton>
         }
       />
       <Container>
-        <WriteForm id='write-form' onSubmit={postSubmitHandler}>
+        <WriteForm>
           <WriteInfo>
-            <WriteFormTitle />
-            <PhotoContents />
+            <WriteFormTitle textRef={titleRef} />
+            <PhotoContents imgRef={imgRef} />
           </WriteInfo>
-          <WriteFormText title={'장소'} />
+          <WriteFormText title={'장소'} textRef={placeRef} />
           <WriteFormSelect
             title={'날짜'}
-            value={moment(time).format('YYYY/MM/DD a hh : mm')}
+            value={moment(timeRef.current).format('YYYY/MM/DD a hh : mm')}
             selectEvent={handleDateSelect}
           />
           <WriteFormSelect
             title={'카테고리'}
             value={
-              !category.categoryName
+              !categoryRef.current
                 ? ''
-                : `${category.categoryName} ${
-                    !category.detailCategoryName
+                : `${categoryRef.current.categoryName} ${
+                    !categoryRef.current.detailCategoryName
                       ? ''
-                      : ' > ' + category.detailCategoryName
+                      : ' > ' + categoryRef.current.detailCategoryName
                   }`
             }
             selectEvent={handleCategorySelect}
           />
-          <WriteFormTextArea title={'내용'} />
+          <WriteFormTextArea title={'내용'} textRef={contentRef} />
           <WriteFormSelect
             title={'결제 수단'}
-            value={!payment.paymentName ? '' : `${payment.paymentName}`}
+            value={
+              !paymentRef.current ? '' : `${paymentRef.current.paymentName}`
+            }
             selectEvent={handlePaymentSelect}
           />
-          <WriteFormText title={'결제처'} />
-          <WriteFormText title={'금액'} />
+          <WriteFormText title={'결제처'} textRef={payPlaceRef} />
+          <WriteFormText title={'금액'} textRef={payPriceRef} />
         </WriteForm>
       </Container>
       <Modal openedModal={openedModal} closeModal={closeModal} />
@@ -107,7 +163,7 @@ const ButtonText = styled.span`
   line-height: 15px;
 `;
 
-const WriteForm = styled.form`
+const WriteForm = styled.div`
   width: 100%;
   padding: 32px 16px;
 `;
