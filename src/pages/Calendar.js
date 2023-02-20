@@ -36,19 +36,21 @@ const Calendar = () => {
                     amounts={GetTotal(caldata)}
                 />
                 <hr />
-                {caldata.map((item) => (
-                    <ExpendList key={item.ehSeq}>
-                        <TitleList>
-                            <Title title={item.ehTitle} />
-                            <Category
-                                culture={item.ehCcSeq}
-                                place={item.ehLocation}
-                                payment={item.ehCcSeq}
-                            ></Category>
-                        </TitleList>
-                        <Price price={item.ehPrice} />
-                    </ExpendList>
-                ))}
+                {caldata.map(
+                    ({ ehSeq, ehTitle, ehCcSeq, ehLocation, ehPrice }) => (
+                        <ExpendList key={ehSeq}>
+                            <TitleList>
+                                <Title title={ehTitle} />
+                                <Category
+                                    culture={ehCcSeq}
+                                    place={ehLocation}
+                                    payment={ehCcSeq}
+                                ></Category>
+                            </TitleList>
+                            <Price price={ehPrice} />
+                        </ExpendList>
+                    )
+                )}
             </Expenditure>
             <BottomNavigation />
         </Page>

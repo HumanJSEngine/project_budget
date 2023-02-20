@@ -1,6 +1,5 @@
 import React from 'react';
 import { ResponsivePie } from '@nivo/pie';
-import { pieData } from './pieData';
 import ConvertStatData from '../../utils/ConvertStatData';
 
 const Chart = ({ statdata }) => {
