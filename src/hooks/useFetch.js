@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const useFetch = (method, url) => {
     const [items, setItems] = useState([]);
+    console.log(items);
     useEffect(() => {
         const fetchItem = async () => {
             const res = await axios({
