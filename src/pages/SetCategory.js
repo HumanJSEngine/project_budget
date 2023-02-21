@@ -37,8 +37,8 @@ const SetCategory = () => {
 
                     {cclist.map((list) => (
                         <SettingCateList
-                            cdclist={list.cdclist}
                             key={list.ccSeq}
+                            to={`/setcategory/${list.ccSeq}`}
                         >
                             {list.ccName}
                         </SettingCateList>

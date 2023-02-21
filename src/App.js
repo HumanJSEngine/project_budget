@@ -46,6 +46,7 @@ function App() {
                 <Route path={'/stats'} element={<Stats />} />
                 <Route path={'/setting'} element={<Setting />} />
                 <Route path={'/setcategory'} element={<SetCategory />} />
+                <Route path={'/setcategory/:id'} element={<SettingCdclist />} />
                 <Route path={'/post'} element={<Post />} />
                 <Route path={'/write'} element={<Write />} />
             </Routes>
