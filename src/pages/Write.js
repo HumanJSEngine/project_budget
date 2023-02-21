@@ -12,6 +12,7 @@ import ModalDate from '../components/common/Modal/ModalDate';
 import ModalPayment from '../components/common/Modal/ModalPayment';
 import Popup from '../components/common/Popup/Popup';
 import PhotoContents from '../components/write/PhotoContents';
+import WriteFormNumber from '../components/write/WriteFormNumber';
 import WriteFormSelect from '../components/write/WriteFormSelect';
 import WriteFormText from '../components/write/WriteFormText';
 import WriteFormTextArea from '../components/write/WriteFormTextArea';
@@ -36,7 +37,7 @@ const Write = () => {
   const contentRef = useRef(null);
   const paymentRef = useRef(null);
   const payPlaceRef = useRef(null);
-  const payPriceRef = useRef(null);
+  const [payPrice, setPayPrice] = useState('');
   const { isOpenPopup, popupMessage, openPopup, closePopup } = usePopup();
   const { openedModal, openModal, closeModal } = useModal();
   const { isOpenCropper, openImageCropper, closeImageCropper } =
@@ -170,7 +171,11 @@ const Write = () => {
             selectEvent={handlePaymentSelect}
           />
           <WriteFormText title={'결제처'} textRef={payPlaceRef} />
-          <WriteFormText title={'금액'} textRef={payPriceRef} />
+          <WriteFormNumber
+            title={'금액'}
+            value={payPrice}
+            setValue={setPayPrice}
+          />
         </WriteForm>
       </Container>
       <Modal openedModal={openedModal} closeModal={closeModal} />
