@@ -10,9 +10,9 @@ import Price from '../components/calendar/Price';
 import DateListTotal from '../components/list/DateListTotal';
 import useFetch from '../hooks/useFetch';
 import GetTotal from '../utils/GetTotal';
-import { useInView } from 'react-intersection-observer';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import Container from '../styles/Container';
+import Header from '../components/Layout/Header';
+import WriteButton from '../components/common/WriteButton';
 
 const List = () => {
     const listdata = useFetch(
@@ -22,6 +22,7 @@ const List = () => {
 
     return (
         <Page>
+              <Container>
             <Expenditure>
                 <>
                     <DateListTotal
@@ -46,6 +47,7 @@ const List = () => {
                     )}
                 </>
             </Expenditure>
+                  </Container>
             <BottomNavigation />
         </Page>
     );

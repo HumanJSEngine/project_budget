@@ -2,16 +2,14 @@ import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 
-const WriteFormText = ({ title, value, onChangeEvent, validation }) => {
+const WriteFormText = ({ title, textRef }) => {
   return (
     <Box>
       <FormTitle>{title}</FormTitle>
       <FormInput
-        type="text"
-        // value={value}
-        placeholder="입력하세요."
-        // onChange={onChangeEvent}
-        {...validation}
+        type='text'
+        placeholder='입력하세요.'
+        ref={textRef}
       ></FormInput>
     </Box>
   );

@@ -6,7 +6,7 @@ import HeaderCloseButton from '../HeaderCloseButton';
 import ModalListBack from './ModalListBack';
 import ModalListItem from './ModalListItem';
 
-const ModalCategory = ({ closeModal, setCategory }) => {
+const ModalCategory = ({ closeModal, categoryRef }) => {
   const [categoryView, switchCategoryView] = useState('default');
   const [categoryList, setCategoryList] = useState([]);
   const [detailCategoryList, setDetailCategoryList] = useState([]);
@@ -40,7 +40,7 @@ const ModalCategory = ({ closeModal, setCategory }) => {
       categorySeq,
       categoryName,
     };
-    setCategory(categoryInfo);
+    categoryRef.current = categoryInfo;
     closeModal();
   };
   const selectDetailCategoryHandler = (categorySeq, categoryName) => {
@@ -50,7 +50,7 @@ const ModalCategory = ({ closeModal, setCategory }) => {
       detailCategorySeq: categorySeq,
       detailCategoryName: categoryName,
     };
-    setCategory(categoryInfo);
+    categoryRef.current = categoryInfo;
     closeModal();
   };
   const backCategory = () => {

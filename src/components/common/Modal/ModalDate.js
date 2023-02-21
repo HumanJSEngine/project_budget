@@ -5,13 +5,13 @@ import colors from '../../../styles/Theme';
 import Header from '../Header';
 import HeaderButton from '../HeaderButton';
 
-const ModalDate = ({ closeModal, currentTime, setTime }) => {
-  const [selectDate, setSelectDate] = useState(currentTime);
+const ModalDate = ({ closeModal, timeRef }) => {
+  const [selectDate, setSelectDate] = useState(timeRef.current);
   const onChangeDate = (e) => {
     setSelectDate(e.target.value);
   };
   const selectTime = () => {
-    selectDate && setTime(selectDate);
+    timeRef.current = selectDate;
     closeModal();
   };
   return (
@@ -28,7 +28,7 @@ const ModalDate = ({ closeModal, currentTime, setTime }) => {
       />
       <ModalContents>
         <InputDateTime
-          type="datetime-local"
+          type='datetime-local'
           value={selectDate}
           onChange={onChangeDate}
         />
