@@ -1,21 +1,21 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import colors from '../styles/Theme';
-import Page from '../styles/Page';
-import Header from '../components/common/Header';
-import HeaderGoBackButton from '../components/common/HeaderGoBackButton';
-import Container from '../styles/Container';
-import FormInput from '../components/common/FormInput';
-import InputAlertLabel from '../components/common/InputAlertLabel';
-import Button from '../components/common/Button';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { memberJoin } from '../api/memberApi';
-import usePopup from '../hooks/usePopup';
+import Button from '../components/common/Button';
+import FormInput from '../components/common/FormInput';
+import Header from '../components/common/Header';
+import HeaderGoBackButton from '../components/common/HeaderGoBackButton';
+import InputAlertLabel from '../components/common/InputAlertLabel';
 import Popup from '../components/common/Popup/Popup';
-import { useDispatch } from 'react-redux';
+import usePopup from '../hooks/usePopup';
 import { loginUser } from '../store/userReducer';
+import Container from '../styles/Container';
+import Page from '../styles/Page';
+import colors from '../styles/Theme';
 
 const registerSchema = yup
   .object({
@@ -65,7 +65,7 @@ const Register = () => {
       const { data, status } = res;
       console.log(res);
       if (status === 'CREATED') {
-        // const { email, nickname } = data;
+        console.log(data);
         dispatch(loginUser(data));
       } else {
         return;
@@ -134,7 +134,7 @@ const Register = () => {
           </InputArea>
           <ActionArea>
             <Button primary>가입하기</Button>
-            <Link to="/login">
+            <Link to='/login'>
               <Button transparent>
                 이미 계정이 있으신가요?{' '}
                 <TextUnderline>로그인하기</TextUnderline>

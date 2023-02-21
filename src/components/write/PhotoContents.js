@@ -1,21 +1,22 @@
 import styled from 'styled-components';
 import { AiFillCamera } from 'react-icons/ai';
 import colors from '../../styles/Theme';
-import { useState } from 'react';
 
-const PhotoContents = ({ imgRef }) => {
-  const [imgFile, setImgFile] = useState('');
-  const changeImageHandler = () => {
-    const file = imgRef.current.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
-    };
-  };
-  return imgFile ? (
+const PhotoContents = ({ imgRef, cropImg, clickImageEvent }) => {
+  return cropImg ? (
     <ImageBox>
-      <img src={imgFile} alt='이미지 파일' />
+      <label htmlFor='image_upload'>
+        <input
+          type='file'
+          accept='image/*'
+          name='image_upload'
+          id='image_upload'
+          onChange={clickImageEvent}
+          ref={imgRef}
+          hidden
+        />
+        <img src={cropImg} alt='이미지 파일' />
+      </label>
     </ImageBox>
   ) : (
     <Box>
@@ -25,7 +26,7 @@ const PhotoContents = ({ imgRef }) => {
           accept='image/*'
           name='image_upload'
           id='image_upload'
-          onChange={changeImageHandler}
+          onChange={clickImageEvent}
           ref={imgRef}
           hidden
         />
