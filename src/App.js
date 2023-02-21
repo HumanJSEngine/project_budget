@@ -17,6 +17,7 @@ import Write from './pages/Write';
 import GalleryList from './pages/GalleryList';
 import { useSelector } from 'react-redux';
 import SetCategory from './pages/SetCategory';
+import SettingCdclist from './components/setting/SettingCdclist';
 
 function App() {
     const [isLogin, setIsLogin] = useState(true);
