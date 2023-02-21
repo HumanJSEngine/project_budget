@@ -12,37 +12,40 @@ import Monthprice from '../components/stats/Monthprice';
 import Header from '../components/Layout/Header';
 import useFetch from '../hooks/useFetch';
 import Percent from '../utils/Percent';
+import Container from '../styles/Container';
 
 const Stats = () => {
-    const statdata = useFetch(
-        'get',
-        'http://haeji.mawani.kro.kr:8585/api/expense/list'
-    );
-    console.log(statdata);
-    return (
-        <Page>
-            <Header />
-            <Exppermonth month={'1월'} monthprice={10000} />
-            <Category>
-                <Monthprice />
-                <Chart statdata={statdata} />
-                <Expcatelist>
-                    {statdata.map((item) => (
-                        <List>
-                            <Leftlist
-                                key={item.ehCcSeq}
-                                part={item.ehC}
-                                percent={Percent(statdata, item.ehPrice)}
-                                color={'#6C72FF'}
-                            />
-                            <Rightlist price={item.ehPrice} />
-                        </List>
-                    ))}
-                </Expcatelist>
-            </Category>
-            <BottomNavigation />
-        </Page>
-    );
+  const statdata = useFetch(
+    'get',
+    'http://haeji.mawani.kro.kr:8585/api/expense/list'
+  );
+  console.log(statdata);
+  return (
+    <Page>
+      <Header />
+      <Container>
+        <Exppermonth month={'1월'} monthprice={10000} />
+        <Category>
+          <Monthprice />
+          <Chart statdata={statdata} />
+          <Expcatelist>
+            {statdata.map((item) => (
+              <List>
+                <Leftlist
+                  key={item.ehCcSeq}
+                  part={item.ehC}
+                  percent={Percent(statdata, item.ehPrice)}
+                  color={'#6C72FF'}
+                />
+                <Rightlist price={item.ehPrice} />
+              </List>
+            ))}
+          </Expcatelist>
+        </Category>
+      </Container>
+      <BottomNavigation />
+    </Page>
+  );
 };
 
 export default Stats;

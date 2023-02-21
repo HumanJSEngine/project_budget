@@ -2,15 +2,50 @@ import styled from 'styled-components';
 import { AiFillCamera } from 'react-icons/ai';
 import colors from '../../styles/Theme';
 
-const PhotoContents = () => {
-  return (
+const PhotoContents = ({ imgRef, cropImg, clickImageEvent }) => {
+  return cropImg ? (
+    <ImageBox>
+      <label htmlFor='image_upload'>
+        <input
+          type='file'
+          accept='image/*'
+          name='image_upload'
+          id='image_upload'
+          onChange={clickImageEvent}
+          ref={imgRef}
+          hidden
+        />
+        <img src={cropImg} alt='이미지 파일' />
+      </label>
+    </ImageBox>
+  ) : (
     <Box>
-      <IconBox>
-        <AiFillCamera size={24} />
-      </IconBox>
+      <label htmlFor='image_upload'>
+        <input
+          type='file'
+          accept='image/*'
+          name='image_upload'
+          id='image_upload'
+          onChange={clickImageEvent}
+          ref={imgRef}
+          hidden
+        />
+        <IconBox>
+          <AiFillCamera size={24} />
+        </IconBox>
+      </label>
     </Box>
   );
 };
+
+const ImageBox = styled.div`
+  width: 56px;
+  height: 56px;
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 const Box = styled.div`
   display: flex;

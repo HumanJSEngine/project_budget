@@ -2,15 +2,13 @@ import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 
-const WriteFormTitle = ({ value, onChangeEvent, validation }) => {
+const WriteFormTitle = ({ textRef }) => {
   return (
     <Box>
       <FormInput
         type={'text'}
-        // value={value}
-        // onChange={onChangeEvent}
         placeholder={'제목을 입력하세요.'}
-        {...validation}
+        ref={textRef}
       />
     </Box>
   );

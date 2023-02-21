@@ -14,6 +14,7 @@ import Perdaytotal from '../components/calendar/Perdaytotal';
 import Header from '../components/Layout/Header';
 import 'react-calendar/dist/Calendar.css';
 import 'moment/locale/ko';
+import Container from '../styles/Container';
 import useFetch from '../hooks/useFetch';
 import GetTotal from '../utils/GetTotal';
 import axios from 'axios';
@@ -84,6 +85,7 @@ const Calendar = () => {
     return (
         <Page>
             <Header title={'제목'} />
+            <Container>
             <CalendarWrap>
                 <ShowCalendar caldata={result} />
             </CalendarWrap>
@@ -111,31 +113,33 @@ const Calendar = () => {
                 )}
                 {setIsLoading && <span>로딩중</span>}
             </Expenditure>
+            </Container>
             <BottomNavigation />
         </Page>
     );
+
 };
 
 const CalendarWrap = styled.div`
-    .react-calendar {
-        width: 100%;
-        max-width: 380px;
-        line-height: 1.25em;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .react-calendar__navigation {
-            width: 100%;
-        }
-        .react-calendar__viewContainer {
-            .react-calendar__month-view {
-                .react-calendar__month-view__days {
-                    height: 280px;
-                }
-            }
-        }
+  .react-calendar {
+    width: 100%;
+    max-width: 380px;
+    line-height: 1.25em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .react-calendar__navigation {
+      width: 100%;
     }
+    .react-calendar__viewContainer {
+      .react-calendar__month-view {
+        .react-calendar__month-view__days {
+          height: 280px;
+        }
+      }
+    }
+  }
 `;
 export default Calendar;
