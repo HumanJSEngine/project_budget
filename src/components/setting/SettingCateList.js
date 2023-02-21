@@ -3,11 +3,29 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
+import axios from 'axios';
 
-const SettingCateList = ({ children, to }) => {
+const SettingCateList = ({ children, to, ccSeq }) => {
+    const delCate = async () => {
+        try {
+            await axios
+                .get(
+                    `http://haeji.mawani.kro.kr:8585/api/category/delete?no=${ccSeq}`
+                )
+                .then((res) => {
+                    if (res) {
+                        alert(res.data.message);
+                    } else {
+                        alert('카테고리 삭제 실패');
+                    }
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <Box>
-            <Minus>-</Minus>
+            <Minus onClick={() => delCate()}>-</Minus>
             <Catelist>
                 <ItemName>{children}</ItemName>
                 <Link to={to}>

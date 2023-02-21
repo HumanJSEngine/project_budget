@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 
-const AddCateList = ({ children }) => {
+const AddCateList = ({ children, addCdclist }) => {
     return (
         <Box>
-            <Plus>+</Plus>
+            <Plus onClick={() => addCdclist()}>+</Plus>
             <Catelist>
                 <ItemName>{children}</ItemName>
             </Catelist>

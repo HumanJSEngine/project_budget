@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Page from '../styles/Page';
-import IconBox from '../styles/IconBox';
-import { HiArrowLeft } from 'react-icons/hi';
 import Container from '../styles/Container';
 import SettingCateList from '../components/setting/SettingCateList';
 import Header from '../components/common/Header';
 import AddCateList from '../components/setting/AddCateList';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 const SetCategory = () => {
     const [cclist, setCclist] = useState([]);
@@ -28,17 +25,37 @@ const SetCategory = () => {
         fetchData();
     }, []);
 
+    const addCate = async () => {
+        let cateName = prompt('추가할 카테고리명을 선택하세요');
+        try {
+            await axios
+                .put(
+                    `http://haeji.mawani.kro.kr:8585/api/category/input?ccName=${cateName}`
+                )
+                .then((response) => {
+                    if (response.data.status) {
+                        alert(response.data.message);
+                    } else {
+                        alert('카테고리 추가 실패');
+                    }
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <Page>
             <Header title={'카테고리 편집'} />
             <Container>
                 <SettingList>
-                    <AddCateList>카테고리 추가</AddCateList>
-
+                    <AddCateList addCate={addCate}>카테고리 추가</AddCateList>
                     {cclist.map((list) => (
                         <SettingCateList
                             key={list.ccSeq}
-                            to={`/setcategory/${list.ccSeq}`}
+                            to={`/setcategory/${list.ccSeq}/${list.ccName}`}
+                            ccSeq={list.ccSeq}
+                            name={list.ccName}
                         >
                             {list.ccName}
                         </SettingCateList>

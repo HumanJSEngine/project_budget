@@ -11,14 +11,14 @@ import AddCateList from './AddCateList';
 import SettingCateList from './SettingCateList';
 
 const SettingCdclist = () => {
-    const { id } = useParams();
+    const { no, name } = useParams();
     const [cdclist, setCdclist] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await axios.get(
-                    `http://haeji.mawani.kro.kr:8585/api/category/detail/list?no=${id}`
+                    `http://haeji.mawani.kro.kr:8585/api/category/detail/list?no=${no}`
                 );
                 setCdclist(result.data.cdclist);
             } catch (error) {
@@ -28,14 +28,37 @@ const SettingCdclist = () => {
         fetchData();
     }, []);
 
-    console.log(cdclist);
+    const addCdclist = async () => {
+        let body = {
+            cdcName: '소분류 테스트용',
+            cdcCcSeq: no,
+        };
+        try {
+            await axios
+                .put(
+                    'http://haeji.mawani.kro.kr:8585/api/category/detail/input',
+                    body
+                )
+                .then((res) => {
+                    if (res.data.status) {
+                        alert(res.data.message);
+                    } else {
+                        alert('카테고리 추가 실패');
+                    }
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <Page>
-            <Header title={'공연'} />
+            <Header title={name} />
             <Container>
                 <SettingList>
-                    <AddCateList>세부 카테고리 추가</AddCateList>
+                    <AddCateList addCdclist={addCdclist}>
+                        세부 카테고리 추가
+                    </AddCateList>
                     {cdclist.length > 0 ? (
                         cdclist.map((list) => (
                             <SettingCateList key={list.cdcSeq}>
