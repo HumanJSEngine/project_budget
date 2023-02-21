@@ -2,16 +2,15 @@ import { SlArrowRight } from 'react-icons/sl';
 import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
+import { NavLink } from 'react-router-dom';
 
-const SettingCateList = ({ children }) => {
+const SettingCateList = ({ children, cdclist }) => {
     return (
         <Box>
             <Minus>-</Minus>
             <Catelist>
                 <ItemName>{children}</ItemName>
-                <button>
-                    <SlArrowRight size={12} />
-                </button>
+                <SlArrowRight size={12} />
             </Catelist>
         </Box>
     );
