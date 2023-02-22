@@ -27,6 +27,7 @@ import colors from '../styles/Theme';
 import blobCreationFromURL from '../utils/blobCreationFromURL';
 
 const Write = () => {
+  const [isLoading, setIsLoding] = useState(false);
   const titleRef = useRef(null);
   const imgRef = useRef(null);
   const [imgFile, setImgFile] = useState();
@@ -54,9 +55,11 @@ const Write = () => {
     openModal(<ModalPayment closeModal={closeModal} paymentRef={paymentRef} />);
   };
   const postSubmitHandler = async () => {
-    // if (checkValidation()) {
-    //   return;
-    // }
+    setIsLoding(true);
+    if (checkValidation()) {
+      setIsLoding(false);
+      return;
+    }
     // const postData = {
     //   title: titleRef.current.value,
     //   date: timeRef.current,
@@ -74,17 +77,22 @@ const Write = () => {
     // formData.append('post', postData);
     console.log(blobObject, cropImg);
     try {
-      // const res = await addPost(postData);
       const res = await addPost(formData);
       console.log(res);
+      setIsLoding(false);
     } catch (err) {
       console.log(err.response);
+      setIsLoding(false);
     }
   };
 
   const checkValidation = () => {
     if (!titleRef.current.value.trim()) {
       openPopup('제목을 입력해 주세요.');
+      return true;
+    }
+    if (!cropImg) {
+      openPopup('사진을 등록해 주세요.');
       return true;
     }
     if (!placeRef.current.value) {
@@ -130,7 +138,10 @@ const Write = () => {
         title={'기록하다'}
         HeaderLeft={<HeaderCloseButton />}
         HeaderRight={
-          <HeaderButton onClick={postSubmitHandler}>
+          <HeaderButton
+            onClick={postSubmitHandler}
+            disabled={isLoading && true}
+          >
             <ButtonText>등록</ButtonText>
           </HeaderButton>
         }

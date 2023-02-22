@@ -6,26 +6,21 @@ import styled from 'styled-components';
 import colors from '../../styles/Theme';
 
 const ShowCalendar = ({ caldata }) => {
-    const data = caldata.map((item) => {
-        return {
-            date: moment(item.ehDate).format('YYYY-MM-DD'),
-            price: item.ehPrice,
-        };
-    });
-    console.log('data', data);
-
-    const result = data.reduce((acc, cur) => {
-        const arr = acc;
-        const index = arr.findIndex((item) => item.date === cur.date);
-        if (index >= 0) {
-            arr[index].price += cur.price;
-        } else if (index === -1) {
-            arr.push(cur);
-        }
-        return arr;
-    }, []);
-
-    console.log('result', result);
+  const data = caldata.map((item) => {
+    return {
+      date: moment(item.ehDate).format('YYYY-MM-DD'),
+      price: item.ehPrice,
+    };
+  });
+  const result = data.reduce((acc, cur) => {
+    const index = acc.findIndex((item) => item.date === cur.date);
+    if (index >= 0) {
+      acc[index].price += cur.price;
+    } else if (index === -1) {
+      acc.push(cur);
+    }
+    return acc;
+  }, []);
 
     //   console.log('datedata', data);
     //   console.log('result', result);
@@ -68,63 +63,38 @@ const ShowCalendar = ({ caldata }) => {
 
     useEffect(() => {}, [result]);
 
-    return (
-        <div>
-            {result.length !== 0 && (
-                <Calendar
-                    // onChange={onChange}
-                    formatDay={(locale, date) => moment(date).format('DD')}
-                    value={value}
-                    tileContent={({ date, view }) => {
-                        let html = [];
-                        result.forEach((item) => {
-                            if (
-                                item.date === moment(date).format('YYYY-MM-DD')
-                            ) {
-                                html.push(
-                                    <>
-                                        <DotWrapper>
-                                            <Dot />
-                                        </DotWrapper>
-                                        <div style={{ width: 20, height: 20 }}>
-                                            {item.price}
-                                        </div>
-                                    </>
-                                );
-                            }
-                        });
-                        return <div>{html}</div>;
-                    }}
-                />
-            )}
-        </div>
-    );
+  return (
+    <div>
+      {result.length !== 0 && (
+        <Calendar
+          // onChange={onChange}
+          formatDay={(locale, date) => moment(date).format('DD')}
+          value={value}
+          tileContent={({ date, view }) => {
+            let html = [];
+            result.forEach((item) => {
+              if (item.date === moment(date).format('2022-MM-DD')) {
+                html.push(<DatePrice>+{item.price}</DatePrice>);
+              } else {
+                html.push(<DatePrice></DatePrice>);
+              }
+            });
+            return <div>{html}</div>;
+          }}
+        />
+      )}
+    </div>
+  );
 };
 
-const DotWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    span {
-        position: absolute;
-        bottom: -20px;
-        white-space: nowrap;
-        font-size: 9px;
-        color: ${colors.primary};
-        transform: translateY(15%);
-    }
-`;
-
-const Dot = styled.div`
-    width: 30px;
-    height: 30px;
-    background-color: ${colors.primary};
-    border-radius: 50%;
-    position: absolute;
-    opacity: 0.8;
-    left: 6px;
-    top: -24px;
+const DatePrice = styled.span`
+  width: 100%;
+  color: ${colors.primary};
+  font-size: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
 `;
 
 export default ShowCalendar;

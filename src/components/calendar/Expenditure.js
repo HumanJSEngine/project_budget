@@ -7,21 +7,11 @@ const Expenditure = ({ children }) => {
 };
 
 const Expenditures = styled.div`
-  /* width: 100%; */
-  /* height: 100%; */
-  /* overflow-y: scroll; */
-  /* scroll-snap-type: y mandatory; */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem 0;
-  padding: 32px 16px;
+  gap: 12px;
+  padding: 32px 0;
   background: ${colors.white};
-  /* ::-webkit-scrollbar {
-    width: 5px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: ${colors.primary};
-  } */
 `;
 
 export default Expenditure;
