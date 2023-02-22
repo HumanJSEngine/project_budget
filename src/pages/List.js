@@ -15,42 +15,43 @@ import Header from '../components/Layout/Header';
 import WriteButton from '../components/common/WriteButton';
 
 const List = () => {
-    const listdata = useFetch(
-        'get',
-        'http://haeji.mawani.kro.kr:8585/api/expense/list'
-    );
+  const listdata = useFetch(
+    'get',
+    'http://haeji.mawani.kro.kr:8585/api/expense/list'
+  );
 
-    return (
-        <Page>
-              <Container>
-            <Expenditure>
-                <>
-                    <DateListTotal
-                        date={'16일 월요일'}
-                        price={GetTotal(listdata).toLocaleString()}
-                    />
-                    <hr />
-                    {listdata.map(
-                        ({ ehSeq, ehTitle, ehCcSeq, ehStoreName, ehPiSeq }) => (
-                            <ExpendList key={ehSeq}>
-                                <TitleList>
-                                    <Title title={ehTitle} />
-                                    <Category
-                                        culture={ehCcSeq}
-                                        place={ehStoreName}
-                                        payment={ehPiSeq}
-                                    ></Category>
-                                </TitleList>
-                                <Price price={10000} />
-                            </ExpendList>
-                        )
-                    )}
-                </>
-            </Expenditure>
-                  </Container>
-            <BottomNavigation />
-        </Page>
-    );
+  return (
+    <Page>
+      <Header />
+      <Container>
+        <Expenditure>
+          <>
+            <DateListTotal
+              date={'16일 월요일'}
+              price={GetTotal(listdata).toLocaleString()}
+            />
+            {listdata.map(
+              ({ ehSeq, ehTitle, ehCcSeq, ehStoreName, ehPiSeq }) => (
+                <ExpendList key={ehSeq}>
+                  <TitleList>
+                    <Title title={ehTitle} />
+                    <Category
+                      culture={ehCcSeq}
+                      place={ehStoreName}
+                      payment={ehPiSeq}
+                    ></Category>
+                  </TitleList>
+                  <Price price={10000} />
+                </ExpendList>
+              )
+            )}
+          </>
+        </Expenditure>
+      </Container>
+      <WriteButton />
+      <BottomNavigation />
+    </Page>
+  );
 };
 
 export default List;

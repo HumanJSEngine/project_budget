@@ -4,14 +4,17 @@ import colors from '../../styles/Theme';
 import fonts from '../../styles/FontStyle';
 
 const Price = ({ price }) => {
-    return <Prices>+{price.toLocaleString()}</Prices>;
+  return <Prices>+{price.toLocaleString()}원</Prices>;
 };
 
-const Prices = styled.div`
-    font: ${fonts.score15Medium};
-    color: ${colors.primary};
-    display: flex;
-    justify-content: center;
-    align-items: center;
+const Prices = styled.span`
+  width: 30%;
+  font: ${fonts.score15Medium};
+  color: ${colors.primary};
+  text-align: end;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
 `;
 export default Price;

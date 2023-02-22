@@ -18,107 +18,119 @@ import Container from '../styles/Container';
 import useFetch from '../hooks/useFetch';
 import GetTotal from '../utils/GetTotal';
 import axios from 'axios';
+import colors from '../styles/Theme';
 
 const Calendar = () => {
-    // const caldata = useFetch(
-    //     'get',
-    //     'http://haeji.mawani.kro.kr:8585/api/expense/list'
-    // );
+  // const caldata = useFetch(
+  //     'get',
+  //     'http://haeji.mawani.kro.kr:8585/api/expense/list'
+  // );
 
-    const [result, setResult] = useState([]);
-    const [item, setItem] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+  const [result, setResult] = useState([]);
+  const [item, setItem] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const getFetchData = async () => {
-        await axios
-            .get('http://haeji.mawani.kro.kr:8585/api/expense/list')
-            .then((res) => {
-                let response = res.data.expense;
-                setResult(response.slice(0, 5));
-                response = response.slice(5);
-                setItem(response);
-                setIsLoading(false);
-            });
-    };
-
-    const _infiniteScroll = useCallback(() => {
-        let scrollHeight = Math.max(
-            document.documentElement.scrollHeight,
-            document.body.scrollHeight
-        );
-        let scrollTop = Math.max(
-            document.documentElement.scrollTop,
-            document.body.scrollTop
-        );
-        let clientHeight = document.documentElement.clientHeight;
-        scrollHeight -= 1000;
-        if (scrollTop + clientHeight >= scrollHeight && isLoading === false) {
-            fetchMoreData();
-        }
-    }, [isLoading]);
-
-    useEffect(() => getFetchData(), []);
-
-    useEffect(() => {
-        window.addEventListener('scroll', _infiniteScroll, true);
-        return () => {
-            window.removeEventListener('scroll', _infiniteScroll, true);
-        };
-    }, [_infiniteScroll]);
-
-    const fetchMoreData = async () => {
-        setIsLoading(true);
-        setResult(result.concat(item.slice(0, 10)));
-        setItem(item.slice(10));
-
-        if (item.length > 15) {
-            const timer = setTimeout(() => {
-                setResult(result.concat(item.slice(0, 20)));
-                setItem(item.slice(20));
-                if (item.length === 25) clearTimeout(timer);
-            }, 1000);
-        }
-
+  const getFetchData = async () => {
+    await axios
+      .get('http://haeji.mawani.kro.kr:8585/api/expense/list')
+      .then((res) => {
+        let response = res.data.expense;
+        setResult(response.slice(0, 5));
+        response = response.slice(5);
+        setItem(response);
         setIsLoading(false);
-    };
+      });
+  };
 
-    return (
-        <Page>
-            <Header title={'제목'} />
-            <Container>
-            <CalendarWrap>
-                <ShowCalendar caldata={result} />
-            </CalendarWrap>
-            <Expenditure>
-                <Datelist date={'1일'} weekday={'월요일'} />
-                <Perdaytotal
-                    counts={result.length}
-                    amounts={GetTotal(result)}
-                />
-                <hr />
-                {result.map(
-                    ({ ehSeq, ehTitle, ehCcSeq, ehLocation, ehPrice }) => (
-                        <ExpendList key={ehSeq}>
-                            <TitleList>
-                                <Title title={ehTitle} />
-                                <Category
-                                    culture={ehCcSeq}
-                                    place={ehLocation}
-                                    payment={ehCcSeq}
-                                ></Category>
-                            </TitleList>
-                            <Price price={ehPrice} />
-                        </ExpendList>
-                    )
-                )}
-                {setIsLoading && <span>로딩중</span>}
-            </Expenditure>
-            </Container>
-            <BottomNavigation />
-        </Page>
-    );
+  //   const _infiniteScroll = useCallback(() => {
+  //     let scrollHeight = Math.max(
+  //       document.documentElement.scrollHeight,
+  //       document.body.scrollHeight
+  //     );
+  //     let scrollTop = Math.max(
+  //       document.documentElement.scrollTop,
+  //       document.body.scrollTop
+  //     );
+  //     let clientHeight = document.documentElement.clientHeight;
+  //     scrollHeight -= 1000;
+  //     if (scrollTop + clientHeight >= scrollHeight && isLoading === false) {
+  //       fetchMoreData();
+  //     }
+  //   }, [isLoading]);
 
+  useEffect(() => {
+    getFetchData();
+  }, []);
+
+  //   useEffect(() => {
+  //     window.addEventListener('scroll', _infiniteScroll, true);
+  //     return () => {
+  //       window.removeEventListener('scroll', _infiniteScroll, true);
+  //     };
+  //   }, [_infiniteScroll]);
+
+  const fetchMoreData = async () => {
+    setIsLoading(true);
+    setResult(result.concat(item.slice(0, 10)));
+    setItem(item.slice(10));
+
+    if (item.length > 15) {
+      const timer = setTimeout(() => {
+        setResult(result.concat(item.slice(0, 20)));
+        setItem(item.slice(20));
+        if (item.length === 25) clearTimeout(timer);
+      }, 1000);
+    }
+    setIsLoading(false);
+  };
+
+  return (
+    <Page>
+      <Container>
+        <CalendarWrap>
+          <ShowCalendar caldata={result} />
+        </CalendarWrap>
+        <Expenditure>
+          <TotalBlock>
+            <Datelist date={'1일'} weekday={'월요일'} />
+            <Perdaytotal counts={result.length} amounts={GetTotal(result)} />
+          </TotalBlock>
+          {result.map(({ ehSeq, ehTitle, ehCcSeq, ehLocation, ehPrice }) => (
+            <ExpendList key={ehSeq}>
+              <TitleList>
+                <Title title={ehTitle} />
+                <Category
+                  culture={ehCcSeq}
+                  place={ehLocation}
+                  payment={ehCcSeq}
+                ></Category>
+              </TitleList>
+              <Price price={ehPrice} />
+            </ExpendList>
+          ))}
+          <LoadingBox>{setIsLoading && <span>로딩중</span>}</LoadingBox>
+        </Expenditure>
+      </Container>
+      <BottomNavigation />
+    </Page>
+  );
 };
+
+const TotalBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid ${colors.gray200};
+`;
+const LoadingBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 52px;
+`;
 
 const CalendarWrap = styled.div`
   .react-calendar {
@@ -130,13 +142,28 @@ const CalendarWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: none;
     .react-calendar__navigation {
       width: 100%;
+      height: 44px;
+      padding: 0 16px;
+      & .react-calendar__navigation__arrow {
+        font-size: 20px;
+        font-weight: 800;
+      }
     }
     .react-calendar__viewContainer {
+      width: 100%;
+      padding: 0 16px;
       .react-calendar__month-view {
         .react-calendar__month-view__days {
-          height: 280px;
+          .react-calendar__tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 52px;
+          }
         }
       }
     }

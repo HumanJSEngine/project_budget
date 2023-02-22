@@ -76,9 +76,9 @@ const ShowCalendar = ({ caldata }) => {
             let html = [];
             result.forEach((item) => {
               if (item.date === moment(date).format('2022-MM-DD')) {
-                html.push(
-                  <div style={{ width: 20, height: 20 }}>{item.price}</div>
-                );
+                html.push(<DatePrice>+{item.price}</DatePrice>);
+              } else {
+                html.push(<DatePrice></DatePrice>);
               }
             });
             return <div>{html}</div>;
@@ -89,30 +89,14 @@ const ShowCalendar = ({ caldata }) => {
   );
 };
 
-const DotWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  span {
-    position: absolute;
-    bottom: -20px;
-    white-space: nowrap;
-    font-size: 9px;
-    color: ${colors.primary};
-    transform: translateY(15%);
-  }
-`;
-
-const Dot = styled.div`
-  width: 30px;
-  height: 30px;
-  background-color: ${colors.primary};
-  border-radius: 50%;
-  position: absolute;
-  opacity: 0.8;
-  left: 6px;
-  top: -24px;
+const DatePrice = styled.span`
+  width: 100%;
+  color: ${colors.primary};
+  font-size: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
 `;
 
 export default ShowCalendar;

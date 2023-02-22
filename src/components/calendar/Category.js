@@ -4,31 +4,49 @@ import colors from '../../styles/Theme';
 import fonts from '../../styles/FontStyle';
 
 const Category = ({ culture, place, payment }) => {
-    return (
-        <Categories>
-            <span>{culture}</span>
-            <span>{place}</span>
-            <span>{payment}</span>
-        </Categories>
-    );
+  return (
+    <Categories>
+      <li>
+        <span>{culture}</span>
+      </li>
+      <li>
+        <span>{place}</span>
+      </li>
+      <li>
+        <span>{place}</span>
+      </li>
+    </Categories>
+  );
 };
 
-const Categories = styled.div`
+const Categories = styled.ul`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  li {
     display: flex;
-    gap: 0 1rem;
-    span {
-        color: ${colors.gray700};
-        font: ${fonts.score12Regular};
-        position: relative;
-        &:nth-child(-n + 2)::after {
-            content: '';
-            width: 1.2px;
-            height: 7px;
-            position: absolute;
-            background: ${colors.gray700};
-            top: 5px;
-            right: -10px;
-        }
+    position: relative;
+    max-width: 35%;
+    & span {
+      color: ${colors.gray700};
+      font: ${fonts.score12Regular};
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
     }
+    &:nth-child(-n + 2)::after {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: 4px;
+      display: block;
+      width: 1px;
+      height: 6px;
+      background: ${colors.gray700};
+    }
+  }
 `;
 export default Category;
