@@ -2,13 +2,16 @@ import { SlArrowRight } from 'react-icons/sl';
 import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
+import { useNavigate } from 'react-router-dom';
 
-const SettingListItem = ({ children }) => {
+const SettingListItem = ({ children, to }) => {
+    const navigate = useNavigate();
+
     return (
         <Box>
             <ItemName>{children}</ItemName>
             <SelectIcon>
-                <SlArrowRight size={12} />
+                <SlArrowRight size={12} onClick={() => navigate(to)} />
             </SelectIcon>
         </Box>
     );

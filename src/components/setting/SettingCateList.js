@@ -1,16 +1,42 @@
 import { SlArrowRight } from 'react-icons/sl';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
-import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
-const SettingCateList = ({ children, cdclist }) => {
+const SettingCateList = ({ children, to, ccSeq, cdcSeq, fetchData }) => {
+    console.log('대분류번호', ccSeq);
+    console.log('소분류번호', cdcSeq);
+
+    const delCate = async () => {
+        try {
+            await axios
+                .get(
+                    ccSeq
+                        ? `http://haeji.mawani.kro.kr:8585/api/category/delete?no=${ccSeq}`
+                        : `http://haeji.mawani.kro.kr:8585/api/category/detail/delete?no=${cdcSeq}`
+                )
+                .then((res) => {
+                    if (res) {
+                        alert(res.data.message);
+                        fetchData();
+                    } else {
+                        alert('카테고리 삭제 실패');
+                    }
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <Box>
-            <Minus>-</Minus>
+            <Minus onClick={() => delCate()}>-</Minus>
             <Catelist>
                 <ItemName>{children}</ItemName>
-                <SlArrowRight size={12} />
+                <Link to={to}>
+                    <SlArrowRight size={12} />
+                </Link>
             </Catelist>
         </Box>
     );
@@ -46,11 +72,6 @@ const Catelist = styled.div`
     justify-content: space-between;
     border-bottom: 1px solid ${colors.gray200};
     padding: 10px 0px;
-    button {
-        border: none;
-        background: transparent;
-        outline: none;
-    }
 `;
 
 const ItemName = styled.span`

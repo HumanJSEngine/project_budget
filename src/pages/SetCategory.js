@@ -1,44 +1,67 @@
 import React from 'react';
 import styled from 'styled-components';
 import Page from '../styles/Page';
-import IconBox from '../styles/IconBox';
-import { HiArrowLeft } from 'react-icons/hi';
 import Container from '../styles/Container';
 import SettingCateList from '../components/setting/SettingCateList';
 import Header from '../components/common/Header';
 import AddCateList from '../components/setting/AddCateList';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
 
 const SetCategory = () => {
     const [cclist, setCclist] = useState([]);
 
+    const fetchData = useCallback(async () => {
+        try {
+            const result = await axios.get(
+                'http://haeji.mawani.kro.kr:8585/api/category/list'
+            );
+            console.log('cclist', cclist);
+            setCclist(result.data.cclist);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await axios.get(
-                    'http://haeji.mawani.kro.kr:8585/api/category/list'
-                );
-                setCclist(result.data.cclist);
-            } catch (error) {
-                console.log(error);
-            }
-        };
         fetchData();
     }, []);
+
+    const addCclist = async () => {
+        let cateName = prompt('추가할 카테고리명을 선택하세요');
+        try {
+            await axios
+                .put(
+                    `http://haeji.mawani.kro.kr:8585/api/category/input?ccName=${cateName}`
+                )
+                .then((response) => {
+                    if (response.data.status) {
+                        alert(response.data.message);
+                        fetchData();
+                    } else {
+                        alert('카테고리 추가 실패');
+                    }
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <Page>
             <Header title={'카테고리 편집'} />
             <Container>
                 <SettingList>
-                    <AddCateList>카테고리 추가</AddCateList>
-
+                    <AddCateList addCclist={addCclist}>
+                        카테고리 추가
+                    </AddCateList>
                     {cclist.map((list) => (
                         <SettingCateList
-                            cdclist={list.cdclist}
                             key={list.ccSeq}
+                            to={`/setcategory/${list.ccSeq}/${list.ccName}`}
+                            ccSeq={list.ccSeq}
+                            name={list.ccName}
+                            fetchData={fetchData}
                         >
                             {list.ccName}
                         </SettingCateList>

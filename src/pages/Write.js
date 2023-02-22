@@ -121,6 +121,7 @@ const Write = () => {
     }
     return false;
   };
+
   const clickImageEvent = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
@@ -130,6 +131,7 @@ const Write = () => {
     };
     openImageCropper();
   };
+
   return (
     <Page>
       <Header
@@ -206,6 +208,7 @@ const Write = () => {
     </Page>
   );
 };
+
 
 const ButtonText = styled.span`
   color: ${colors.primary};

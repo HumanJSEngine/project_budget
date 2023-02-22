@@ -22,48 +22,46 @@ const ShowCalendar = ({ caldata }) => {
     return acc;
   }, []);
 
-  //   console.log('datedata', data);
-  //   console.log('result', result);
-  const [value, onChange] = useState(new Date());
-  //   const [mark, setMark] = useState(dateData);
-  //   useEffect(() => setMark(dateData), []);
-  //   console.log(mark);
+    //   console.log('datedata', data);
+    //   console.log('result', result);
+    const [value, onChange] = useState(new Date());
+    //   const [mark, setMark] = useState(dateData);
+    //   useEffect(() => setMark(dateData), []);
+    //   console.log(mark);
 
-  //   const showTile = ({ date, view }) => {
-  //     let html = [];
+    //   const showTile = ({ date, view }) => {
+    //     let html = [];
 
-  //     // 우선 mark 와 같은 경우 item 을 리턴하여 저장한다.
-  //     let obj = caldata.find((item, index) => {
-  //       if (item.ehDate === moment(date).format('YYYY-MM-DD')) {
-  //         return item;
-  //       }
-  //     });
+    //     // 우선 mark 와 같은 경우 item 을 리턴하여 저장한다.
+    //     let obj = caldata.find((item, index) => {
+    //       if (item.ehDate === moment(date).format('YYYY-MM-DD')) {
+    //         return item;
+    //       }
+    //     });
 
-  //     if (obj !== undefined) {
-  //       html.push(<div> {obj.price}</div>);
+    //     if (obj !== undefined) {
+    //       html.push(<div> {obj.price}</div>);
 
-  //       return (
-  //         <DotWrapper>
-  //           <Dot />
-  //         </DotWrapper>
-  //       );
-  //     }
+    //       return (
+    //         <DotWrapper>
+    //           <Dot />
+    //         </DotWrapper>
+    //       );
+    //     }
 
-  //     return null;
+    //     return null;
 
-  // if (mark.find((item) => item.date === moment(date).format('YYYY-MM-DD'))) {
-  //   return (
-  //     <DotWrapper>
-  //       <Dot />
-  //     </DotWrapper>
-  //   );
-  // }
-  // return null;
-  //   };
+    // if (mark.find((item) => item.date === moment(date).format('YYYY-MM-DD'))) {
+    //   return (
+    //     <DotWrapper>
+    //       <Dot />
+    //     </DotWrapper>
+    //   );
+    // }
+    // return null;
+    //   };
 
-  useEffect(() => {
-    console.log(result);
-  }, [result]);
+    useEffect(() => {}, [result]);
 
   return (
     <div>

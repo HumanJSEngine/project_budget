@@ -17,6 +17,7 @@ import Write from './pages/Write';
 import GalleryList from './pages/GalleryList';
 import { useSelector } from 'react-redux';
 import SetCategory from './pages/SetCategory';
+import SetPayment from './pages/SetPayment';
 import SettingCdclist from './components/setting/SettingCdclist';
 
 function App() {
@@ -45,7 +46,12 @@ function App() {
                 <Route path={'/calendar'} element={<Calendar />} />
                 <Route path={'/stats'} element={<Stats />} />
                 <Route path={'/setting'} element={<Setting />} />
+                <Route path={'/setpayment'} element={<SetPayment />} />
                 <Route path={'/setcategory'} element={<SetCategory />} />
+                <Route
+                    path={'/setcategory/:no/:name'}
+                    element={<SettingCdclist />}
+                />
                 <Route path={'/post'} element={<Post />} />
                 <Route path={'/write'} element={<Write />} />
             </Routes>
