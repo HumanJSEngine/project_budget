@@ -4,26 +4,22 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment/moment';
 import styled from 'styled-components';
 import colors from '../../styles/Theme';
-import GetDateList from '../../utils/GetDateList';
 
 const ShowCalendar = ({ caldata }) => {
-  //   const dateData = GetDateList(caldata);
   const data = caldata.map((item) => {
     return {
       date: moment(item.ehDate).format('YYYY-MM-DD'),
       price: item.ehPrice,
     };
   });
-
   const result = data.reduce((acc, cur) => {
-    const arr = acc;
-    const index = arr.findIndex((item) => item.date === cur.date);
+    const index = acc.findIndex((item) => item.date === cur.date);
     if (index >= 0) {
-      arr[index].price += cur.price;
+      acc[index].price += cur.price;
     } else if (index === -1) {
-      arr.push(cur);
+      acc.push(cur);
     }
-    return arr;
+    return acc;
   }, []);
 
   //   console.log('datedata', data);
