@@ -19,35 +19,34 @@ const List = () => {
         'get',
         'http://haeji.mawani.kro.kr:8585/api/expense/list'
     );
+    console.log(listdata);
 
     return (
         <Page>
-              <Container>
-            <Expenditure>
-                <>
-                    <DateListTotal
-                        date={'16일 월요일'}
-                        price={GetTotal(listdata).toLocaleString()}
-                    />
-                    <hr />
-                    {listdata.map(
-                        ({ ehSeq, ehTitle, ehCcSeq, ehStoreName, ehPiSeq }) => (
-                            <ExpendList key={ehSeq}>
+            <Container>
+                <Expenditure>
+                    <>
+                        <DateListTotal
+                            date={'월요일'}
+                            price={GetTotal(listdata).toLocaleString()}
+                        />
+                        <hr />
+                        {listdata.map((list) => (
+                            <ExpendList key={list.ehSeq}>
                                 <TitleList>
-                                    <Title title={ehTitle} />
+                                    <Title title={list.ehTitle} />
                                     <Category
-                                        culture={ehCcSeq}
-                                        place={ehStoreName}
-                                        payment={ehPiSeq}
+                                        culture={list.ehCcSeq}
+                                        place={list.ehStoreName}
+                                        payment={list.ehPiSeq}
                                     ></Category>
                                 </TitleList>
-                                <Price price={10000} />
+                                <Price price={list.ehPrice} />
                             </ExpendList>
-                        )
-                    )}
-                </>
-            </Expenditure>
-                  </Container>
+                        ))}
+                    </>
+                </Expenditure>
+            </Container>
             <BottomNavigation />
         </Page>
     );

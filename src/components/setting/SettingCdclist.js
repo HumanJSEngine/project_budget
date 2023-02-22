@@ -12,19 +12,20 @@ const SettingCdclist = () => {
     const { no, name } = useParams();
     const [cdclist, setCdclist] = useState([]);
 
+    const fetchData = async () => {
+        try {
+            const result = await axios.get(
+                `http://haeji.mawani.kro.kr:8585/api/category/detail/list?no=${no}`
+            );
+            setCdclist(result.data.cdclist);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await axios.get(
-                    `http://haeji.mawani.kro.kr:8585/api/category/detail/list?no=${no}`
-                );
-                setCdclist(result.data.cdclist);
-            } catch (error) {
-                console.log(error);
-            }
-        };
         fetchData();
-    }, [no]);
+    }, []);
 
     const addCdclist = async () => {
         const cdcName = prompt('추가할 소분류를 입력하세요');
@@ -41,6 +42,7 @@ const SettingCdclist = () => {
                 .then((res) => {
                     if (res.data.status) {
                         alert(res.data.message);
+                        fetchData();
                     } else {
                         alert('카테고리 추가 실패');
                     }
@@ -63,6 +65,7 @@ const SettingCdclist = () => {
                             <SettingCateList
                                 key={list.cdcSeq}
                                 cdcSeq={list.cdcSeq}
+                                fetchData={fetchData}
                             >
                                 {list.cdcName}
                             </SettingCateList>

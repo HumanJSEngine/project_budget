@@ -5,7 +5,7 @@ import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 import axios from 'axios';
 
-const SettingCateList = ({ children, to, ccSeq, cdcSeq }) => {
+const SettingCateList = ({ children, to, ccSeq, cdcSeq, fetchData }) => {
     console.log('대분류번호', ccSeq);
     console.log('소분류번호', cdcSeq);
 
@@ -20,6 +20,7 @@ const SettingCateList = ({ children, to, ccSeq, cdcSeq }) => {
                 .then((res) => {
                     if (res) {
                         alert(res.data.message);
+                        fetchData();
                     } else {
                         alert('카테고리 삭제 실패');
                     }

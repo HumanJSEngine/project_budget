@@ -17,7 +17,9 @@ const Setting = () => {
                     <SettingListItem to={'/setcategory'}>
                         카테고리 편집
                     </SettingListItem>
-                    <SettingListItem>결제 수단 편집</SettingListItem>
+                    <SettingListItem to={'/setpayment'}>
+                        결제 수단 편집
+                    </SettingListItem>
                     <SettingListItem>설정</SettingListItem>
                 </SettingList>
             </Container>

@@ -6,22 +6,24 @@ import SettingCateList from '../components/setting/SettingCateList';
 import Header from '../components/common/Header';
 import AddCateList from '../components/setting/AddCateList';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const SetCategory = () => {
     const [cclist, setCclist] = useState([]);
 
+    const fetchData = useCallback(async () => {
+        try {
+            const result = await axios.get(
+                'http://haeji.mawani.kro.kr:8585/api/category/list'
+            );
+            console.log('cclist', cclist);
+            setCclist(result.data.cclist);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await axios.get(
-                    'http://haeji.mawani.kro.kr:8585/api/category/list'
-                );
-                setCclist(result.data.cclist);
-            } catch (error) {
-                console.log(error);
-            }
-        };
         fetchData();
     }, []);
 
@@ -35,6 +37,7 @@ const SetCategory = () => {
                 .then((response) => {
                     if (response.data.status) {
                         alert(response.data.message);
+                        fetchData();
                     } else {
                         alert('카테고리 추가 실패');
                     }
@@ -58,6 +61,7 @@ const SetCategory = () => {
                             to={`/setcategory/${list.ccSeq}/${list.ccName}`}
                             ccSeq={list.ccSeq}
                             name={list.ccName}
+                            fetchData={fetchData}
                         >
                             {list.ccName}
                         </SettingCateList>

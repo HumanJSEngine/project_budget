@@ -21,6 +21,7 @@ const Stats = () => {
     );
 
     console.log(statdata);
+
     return (
         <Page>
             <Header />
@@ -28,13 +29,12 @@ const Stats = () => {
                 <Exppermonth month={'1월'} monthprice={10000} />
                 <Category>
                     <Monthprice />
-                    <Chart statdata={statdata} />
+                    {/* <Chart statdata={statdata} /> */}
                     <Expcatelist>
                         {statdata.map((item) => (
-                            <List>
+                            <List key={item.ehSeq}>
                                 <Leftlist
-                                    key={item.ehCcSeq}
-                                    part={item.ehC}
+                                    part={item.ehCcSeq}
                                     percent={Percent(statdata, item.ehPrice)}
                                     color={'#6C72FF'}
                                 />
