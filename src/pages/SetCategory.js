@@ -16,7 +16,6 @@ const SetCategory = () => {
             const result = await axios.get(
                 'http://haeji.mawani.kro.kr:8585/api/category/list'
             );
-            console.log('cclist', cclist);
             setCclist(result.data.cclist);
         } catch (error) {
             console.log(error);

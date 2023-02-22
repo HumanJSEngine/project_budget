@@ -29,11 +29,34 @@ const SettingCateList = ({ children, to, ccSeq, cdcSeq, fetchData }) => {
             console.log(error);
         }
     };
+
+    const updateCate = async () => {
+        let catename = prompt('수정할 카테고리명을 입력하세요');
+
+        try {
+            await axios
+                .post(
+                    ccSeq
+                        ? `http://haeji.mawani.kro.kr:8585/api/category/update?no=${ccSeq}&name=${catename}`
+                        : `http://haeji.mawani.kro.kr:8585/api/category/detail/update?no=${cdcSeq}&name=${catename}`
+                )
+                .then((res) => {
+                    if (res) {
+                        alert(res.data.message);
+                        fetchData();
+                    } else {
+                        alert('카테고리 삭제 실패');
+                    }
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <Box>
             <Minus onClick={() => delCate()}>-</Minus>
             <Catelist>
-                <ItemName>{children}</ItemName>
+                <ItemName onClick={() => updateCate()}>{children}</ItemName>
                 <Link to={to}>
                     <SlArrowRight size={12} />
                 </Link>
@@ -80,6 +103,7 @@ const ItemName = styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `;
 
 export default SettingCateList;
