@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import fonts from '../../styles/FontStyle';
-import colors from '../../styles/Theme';
 import axios from 'axios';
 import Page from '../../styles/Page';
 import Header from '../common/Header';
@@ -26,11 +24,12 @@ const SettingCdclist = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [no]);
 
     const addCdclist = async () => {
+        const cdcName = prompt('추가할 소분류를 입력하세요');
         let body = {
-            cdcName: '소분류 테스트용',
+            cdcName: cdcName,
             cdcCcSeq: no,
         };
         try {
@@ -61,7 +60,10 @@ const SettingCdclist = () => {
                     </AddCateList>
                     {cdclist.length > 0 ? (
                         cdclist.map((list) => (
-                            <SettingCateList key={list.cdcSeq}>
+                            <SettingCateList
+                                key={list.cdcSeq}
+                                cdcSeq={list.cdcSeq}
+                            >
                                 {list.cdcName}
                             </SettingCateList>
                         ))

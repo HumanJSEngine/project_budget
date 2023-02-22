@@ -5,12 +5,17 @@ import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 import axios from 'axios';
 
-const SettingCateList = ({ children, to, ccSeq }) => {
+const SettingCateList = ({ children, to, ccSeq, cdcSeq }) => {
+    console.log('대분류번호', ccSeq);
+    console.log('소분류번호', cdcSeq);
+
     const delCate = async () => {
         try {
             await axios
                 .get(
-                    `http://haeji.mawani.kro.kr:8585/api/category/delete?no=${ccSeq}`
+                    ccSeq
+                        ? `http://haeji.mawani.kro.kr:8585/api/category/delete?no=${ccSeq}`
+                        : `http://haeji.mawani.kro.kr:8585/api/category/detail/delete?no=${cdcSeq}`
                 )
                 .then((res) => {
                     if (res) {

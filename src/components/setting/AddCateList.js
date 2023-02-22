@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import fonts from '../../styles/FontStyle';
 import colors from '../../styles/Theme';
 
-const AddCateList = ({ children, addCdclist }) => {
+const AddCateList = ({ children, addCclist, addCdclist }) => {
     return (
         <Box>
-            <Plus onClick={() => addCdclist()}>+</Plus>
+            {addCclist ? (
+                <Plus onClick={() => addCclist()}>+</Plus>
+            ) : (
+                <Plus onClick={() => addCdclist()}>+</Plus>
+            )}
+
             <Catelist>
                 <ItemName>{children}</ItemName>
             </Catelist>
