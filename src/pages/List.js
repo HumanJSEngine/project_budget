@@ -1,52 +1,41 @@
 import React from 'react';
 import BottomNavigation from '../components/common/BottomNavigation';
 import Page from '../styles/Page';
-import Expenditure from '../components/calendar/Expenditure';
-import ExpendList from '../components/calendar/ExpendList';
-import TitleList from '../components/calendar/TitleList';
-import Title from '../components/calendar/Title';
-import Category from '../components/calendar/Category';
-import Price from '../components/calendar/Price';
-import DateListTotal from '../components/list/DateListTotal';
-import useFetch from '../hooks/useFetch';
-import GetTotal from '../utils/GetTotal';
 import Container from '../styles/Container';
 import Header from '../components/Layout/Header';
 import WriteButton from '../components/common/WriteButton';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { getPost } from '../api/postApi';
+import { useSelector } from 'react-redux';
+import DefaultList from '../components/list/DefaultList';
+import GalleryList from '../components/list/GalleryList';
 
 const List = () => {
-  const listdata = useFetch(
-    'get',
-    'http://haeji.mawani.kro.kr:8585/api/expense/list'
-  );
-
+  const setting = useSelector((state) => state.setting);
+  const { listType } = setting;
+  const [postList, setPostList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const getPostList = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getPost();
+      setPostList(res.expense);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    getPostList();
+  }, []);
   return (
     <Page>
       <Header />
       <Container>
-        <Expenditure>
-          <>
-            <DateListTotal
-              date={'16일 월요일'}
-              price={GetTotal(listdata).toLocaleString()}
-            />
-            {listdata.map(
-              ({ ehSeq, ehTitle, ehCcSeq, ehStoreName, ehPiSeq }) => (
-                <ExpendList key={ehSeq}>
-                  <TitleList>
-                    <Title title={ehTitle} />
-                    <Category
-                      culture={ehCcSeq}
-                      place={ehStoreName}
-                      payment={ehPiSeq}
-                    ></Category>
-                  </TitleList>
-                  <Price price={10000} />
-                </ExpendList>
-              )
-            )}
-          </>
-        </Expenditure>
+        {listType === 'default' && <DefaultList list={postList} />}
+        {listType === 'gallery' && <GalleryList list={postList} />}
       </Container>
       <WriteButton />
       <BottomNavigation />

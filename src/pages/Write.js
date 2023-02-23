@@ -1,5 +1,6 @@
 import moment from 'moment';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { addPost } from '../api/postApi';
 import Header from '../components/common/Header';
@@ -24,16 +25,16 @@ import Container from '../styles/Container';
 import fonts from '../styles/FontStyle';
 import Page from '../styles/Page';
 import colors from '../styles/Theme';
-import blobCreationFromURL from '../utils/blobCreationFromURL';
 
 const Write = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoding] = useState(false);
   const titleRef = useRef(null);
   const imgRef = useRef(null);
   const [imgFile, setImgFile] = useState();
   const [cropImg, setCropImg] = useState();
   const placeRef = useRef(null);
-  const timeRef = useRef(moment().format('YYYY-MM-DDTHH:mm'));
+  const timeRef = useRef(moment().format('YYYY-MM-DDTHH:mm:ss'));
   const categoryRef = useRef(null);
   const contentRef = useRef(null);
   const paymentRef = useRef(null);
@@ -60,28 +61,38 @@ const Write = () => {
       setIsLoding(false);
       return;
     }
-    // const postData = {
-    //   title: titleRef.current.value,
-    //   date: timeRef.current,
-    //   paymentSeq: paymentRef.current.paymentSeq,
-    //   price: payPriceRef.current.value,
-    //   storeName: payPlaceRef.current.value,
-    //   location: placeRef.current.value,
-    //   categorySeq: categoryRef.current.categorySeq,
-    //   detailCategorySeq: categoryRef.current.detailCategoryName,
-    //   content: contentRef.current.value,
-    // };
-    const blobObject = blobCreationFromURL(cropImg);
+
+    const bstr = atob(cropImg.split(',')[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    const imageFile = new File([u8arr], `${titleRef.current.value}.jpeg`, {
+      type: 'image/jpeg',
+    });
+
     const formData = new FormData();
-    formData.append('img', blobObject);
-    // formData.append('post', postData);
-    console.log(blobObject, cropImg);
+    formData.append('ehTitle', titleRef.current.value);
+    formData.append('ehDate', timeRef.current);
+    formData.append('ehMiSeq', 1);
+    formData.append('ehPiSeq', paymentRef.current.paymentSeq);
+    formData.append('ehPrice', Number(payPrice.replace(/,/g, '')));
+    formData.append('ehStoreName', payPlaceRef.current.value);
+    formData.append('ehLocation', placeRef.current.value);
+    formData.append('ehBalance', 10000);
+    formData.append('ehCcSeq', categoryRef.current.categorySeq);
+    formData.append('ehCdcSeq', categoryRef.current.detailCategorySeq);
+    formData.append('ehContent', contentRef.current.value);
+    formData.append('ehImgFile', imageFile);
+
     try {
       const res = await addPost(formData);
       console.log(res);
       setIsLoding(false);
+      navigate('/');
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
       setIsLoding(false);
     }
   };
@@ -202,6 +213,7 @@ const Write = () => {
         isOpenCropper={isOpenCropper}
         closeImageCropper={closeImageCropper}
         imgRef={imgRef}
+        setImgFile={setImgFile}
         imgFile={imgFile}
         setCropImg={setCropImg}
       />
