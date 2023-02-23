@@ -14,7 +14,7 @@ const Datelist = ({ date, weekday }) => {
 
 const Datelists = styled.p`
   display: flex;
-
+  gap: 4px;
   span {
     color: ${colors.gray900};
     font: ${fonts.score13Medium};

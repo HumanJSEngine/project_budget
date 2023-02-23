@@ -12,21 +12,24 @@ const ImageCropper = ({
   closeImageCropper,
   imgRef,
   imgFile,
+  setImgFile,
   setCropImg,
 }) => {
   const cropperRef = useRef(null);
   const onCrop = () => {
     const imageElement = cropperRef.current;
     const cropper = imageElement.cropper;
-    setCropImg(cropper.getCroppedCanvas().toDataURL('image/webp', 0.7));
+    setCropImg(cropper.getCroppedCanvas().toDataURL('image/jpeg', 0.7));
   };
   const closeCropperHandler = () => {
     imgRef.current.value = null;
+    setImgFile();
     closeImageCropper();
   };
   const onCropHandler = () => {
     onCrop();
     imgRef.current.value = null;
+    setImgFile();
     closeImageCropper();
   };
   return (

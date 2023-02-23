@@ -21,11 +21,6 @@ import axios from 'axios';
 import colors from '../styles/Theme';
 
 const Calendar = () => {
-  // const caldata = useFetch(
-  //     'get',
-  //     'http://haeji.mawani.kro.kr:8585/api/expense/list'
-  // );
-
   const [result, setResult] = useState([]);
   const [item, setItem] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -148,8 +143,7 @@ const CalendarWrap = styled.div`
       height: 44px;
       padding: 0 16px;
       & .react-calendar__navigation__arrow {
-        font-size: 20px;
-        font-weight: 800;
+        font-size: 24px;
       }
     }
     .react-calendar__viewContainer {

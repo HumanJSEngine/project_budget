@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const INITIAL_STATE = {
-  listType: 'default',
+  listType: 'gallery',
 };
 
 const settingReducer = createSlice({
