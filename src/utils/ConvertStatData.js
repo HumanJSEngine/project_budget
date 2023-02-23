@@ -11,8 +11,8 @@ const ConvertStatData = (items) => {
     items.forEach((item) => (priceTotal += item.ehPrice));
     items.forEach((item, idx) =>
         statdata.push({
-            id: item.ehCcSeq,
-            label: item.ehCcSeq,
+            id: item.ehSeq,
+            label: item.ehSeq,
             value: Math.round((item.ehPrice / priceTotal) * 1000),
             color: color[Math.floor(Math.random() * 4 + 1)],
         })

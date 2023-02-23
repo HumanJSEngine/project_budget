@@ -7,6 +7,7 @@ import Header from '../components/common/Header';
 import AddCateList from '../components/setting/AddCateList';
 import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
+import { addCategory } from '../api/categoryApi';
 
 const SetCategory = () => {
     const [cclist, setCclist] = useState([]);
@@ -24,7 +25,7 @@ const SetCategory = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData]);
 
     const addCclist = async () => {
         let cateName = prompt('추가할 카테고리명을 선택하세요');

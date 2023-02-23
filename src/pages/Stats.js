@@ -11,8 +11,8 @@ import Leftlist from '../components/stats/Leftlist';
 import Monthprice from '../components/stats/Monthprice';
 import Header from '../components/Layout/Header';
 import useFetch from '../hooks/useFetch';
-import Percent from '../utils/Percent';
 import Container from '../styles/Container';
+import ConvertPercent from '../utils/ConvertPercent';
 
 const Stats = () => {
     const statdata = useFetch(
@@ -20,7 +20,8 @@ const Stats = () => {
         'http://haeji.mawani.kro.kr:8585/api/expense/list'
     );
 
-    console.log(statdata);
+    let percent = ConvertPercent(statdata);
+    console.log('퍼센트', percent);
 
     return (
         <Page>
@@ -29,14 +30,15 @@ const Stats = () => {
                 <Exppermonth month={'1월'} monthprice={10000} />
                 <Category>
                     <Monthprice />
-                    {/* <Chart statdata={statdata} /> */}
+                    <Chart statdata={statdata} />
                     <Expcatelist>
                         {statdata.map((item) => (
                             <List key={item.ehSeq}>
                                 <Leftlist
                                     part={item.ehCcSeq}
-                                    percent={Percent(statdata, item.ehPrice)}
-                                    color={'#6C72FF'}
+                                    price={item.ehPrice}
+                                    percent={ConvertPercent(statdata)}
+                                    color={'#6C80FF'}
                                 />
                                 <Rightlist price={item.ehPrice} />
                             </List>

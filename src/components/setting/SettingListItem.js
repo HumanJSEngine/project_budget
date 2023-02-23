@@ -8,10 +8,10 @@ const SettingListItem = ({ children, to }) => {
     const navigate = useNavigate();
 
     return (
-        <Box>
+        <Box onClick={() => navigate(to)}>
             <ItemName>{children}</ItemName>
             <SelectIcon>
-                <SlArrowRight size={12} onClick={() => navigate(to)} />
+                <SlArrowRight size={12} />
             </SelectIcon>
         </Box>
     );

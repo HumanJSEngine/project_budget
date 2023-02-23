@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import colors from '../../styles/Theme';
 import fonts from '../../styles/FontStyle';
 
-const Leftlist = ({ part, percent, color }) => {
+const Leftlist = ({ part, price, percent, color }) => {
     return (
         <Leftlists color={color}>
             <span></span>
             <span className='part'>{part}</span>
-            <span className='percent'>{percent}%</span>
+            <span className='percent'>
+                {((price / percent) * 100).toFixed(2)}%
+            </span>
         </Leftlists>
     );
 };
