@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import colors from '../../styles/Theme';
 import fonts from '../../styles/FontStyle';
 
-const Exppermonth = () => {
+const Exppermonth = ({ month, monthprice }) => {
     return (
         <Expmonth>
-            <p className='month'>1월 문화 비용</p>
-            <p className='monthprice'>+10,000</p>
+            <p className='month'>{month} ehSeq</p>
+            <p className='monthprice'>{monthprice.toLocaleString()}</p>
         </Expmonth>
     );
 };

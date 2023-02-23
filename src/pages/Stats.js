@@ -27,7 +27,10 @@ const Stats = () => {
         <Page>
             <Header />
             <Container>
-                <Exppermonth month={'1월'} monthprice={10000} />
+                <Exppermonth
+                    month={'1월'}
+                    monthprice={ConvertPercent(statdata)}
+                />
                 <Category>
                     <Monthprice />
                     <Chart statdata={statdata} />
