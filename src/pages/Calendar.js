@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BottomNavigation from '../components/common/BottomNavigation';
 import ShowCalendar from '../components/ui/ShowCalendar';
@@ -11,11 +11,9 @@ import Price from '../components/calendar/Price';
 import Expenditure from '../components/calendar/Expenditure';
 import Datelist from '../components/calendar/Datelist';
 import Perdaytotal from '../components/calendar/Perdaytotal';
-import Header from '../components/Layout/Header';
 import 'react-calendar/dist/Calendar.css';
 import 'moment/locale/ko';
 import Container from '../styles/Container';
-import useFetch from '../hooks/useFetch';
 import GetTotal from '../utils/GetTotal';
 import axios from 'axios';
 import colors from '../styles/Theme';
